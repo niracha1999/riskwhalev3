@@ -4,7 +4,43 @@ import { Popover } from "@headlessui/react";
 import Head from "next/head";
 import { LockClosedIcon } from "@heroicons/react/solid";
 
-export default function authen() {
+const signin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showToast, setShowToast] = useState(false);
+
+  let history = useHistory();
+
+  const authen = () => {
+    axios
+      .post(
+        "http://ec2-3-0-20-60.ap-southeast-1.compute.amazonaws.com:8001/customer/auth/login",
+        {
+          email: email,
+          password: password,
+        }
+      )
+      .then((response) => {
+        console.log(response);
+
+        if (response.data) {
+          const token = response.data;
+
+          if (token === "invalid username or password") {
+            console.log("Invalid username or password");
+            setEmail("");
+            setPassword("");
+            setShowToast(true);
+          } else {
+            localStorage.setItem("token", token);
+
+            history.push("/functions");
+          }
+        } else if (response.data === "Incorrect") {
+        }
+        console.log(localStorage.token);
+      });
+  };
   return (
     <div>
       <MainMenu />
@@ -29,8 +65,9 @@ export default function authen() {
                   Email address
                 </label>
                 <input
-                  id="email-address"
-                  name="email"
+                  id={email}
+                  name={email}
+                  onIonChange={(e) => setEmail(e.detail.value)}
                   type="email"
                   autoComplete="email"
                   required
@@ -43,8 +80,9 @@ export default function authen() {
                   Password
                 </label>
                 <input
-                  id="password"
-                  name="password"
+                  id={password}
+                  name={password}
+                  onIonChange={(e) => setPassword(e.detail.value)}
                   type="password"
                   autoComplete="current-password"
                   required
@@ -56,7 +94,7 @@ export default function authen() {
 
             <div>
               <button
-                type="submit"
+                onClick={authen}
                 className="group h-full relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -83,6 +121,8 @@ export default function authen() {
           </div>
         </div>
       </div>
+      
     </div>
   );
-}
+};
+export default signin;
