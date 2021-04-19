@@ -138,14 +138,14 @@ export const MainMenu = () => {
                 <div className="py-6 px-5 space-y-6">
                   <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                     <a
-                      href="#"
+                      href="/BIA_Home"
                       className="text-base font-medium text-gray-900 hover:text-gray-700"
                     >
                       Business Impact Analysis
                     </a>
 
                     <a
-                      href="#"
+                      href="/RA_Home"
                       className="text-base font-medium text-gray-900 hover:text-gray-700"
                     >
                       Risk Assessment

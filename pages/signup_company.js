@@ -19,8 +19,9 @@ const ScrollToPoint2 = () => {
   });
 };
 
-function signup_company() {
+const signup_company = () => {
   const [inputFields, setInputFields] = useState([{ id: uuidv4(), dept: "" }]);
+  const [email, setEmail] = useState("");
 
   const addField = () => {
     setInputFields([...inputFields, { id: uuidv4(), dept: "" }]);
@@ -84,6 +85,8 @@ function signup_company() {
                           type="text"
                           name="email"
                           id="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                           autoComplete="email"
                           required
                           className="focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
@@ -377,7 +380,7 @@ function signup_company() {
                               onChange={(event) =>
                                 onChange(inputField.id, event)
                               }
-                              id={inputField.dept}
+                              value={inputField.dept}
                               type="text"
                             />
                           </div>
@@ -479,6 +482,6 @@ function signup_company() {
       </>
     </div>
   );
-}
+};
 
 export default signup_company;
