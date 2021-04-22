@@ -1,8 +1,8 @@
-import styles from "../styles/Home.module.css";
 import { MainMenu } from "../components/MainMenu";
-import { Popover } from "@headlessui/react";
-import Head from "next/head";
+import React, { SyntheticEvent, useEffect, useState } from "react";
 import { LockClosedIcon } from "@heroicons/react/solid";
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const signin = () => {
   const [email, setEmail] = useState("");
@@ -11,36 +11,26 @@ const signin = () => {
 
   let history = useHistory();
 
-  const authen = () => {
-    axios
-      .post(
-        "http://ec2-3-0-20-60.ap-southeast-1.compute.amazonaws.com:8001/customer/auth/login",
-        {
-          email: email,
-          password: password,
-        }
-      )
-      .then((response) => {
-        console.log(response);
-
-        if (response.data) {
-          const token = response.data;
-
-          if (token === "invalid username or password") {
-            console.log("Invalid username or password");
-            setEmail("");
-            setPassword("");
-            setShowToast(true);
-          } else {
-            localStorage.setItem("token", token);
-
-            history.push("/functions");
-          }
-        } else if (response.data === "Incorrect") {
-        }
-        console.log(localStorage.token);
-      });
+  const dataK = {
+    email: email,
+    password: password,
   };
+
+  const authen = async () => {
+    const data = await fetch("http://localhost:1000/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dataK),
+    });
+
+    console.log(data);
+    // if (data.status === 200) {
+    //   console.log("login successful");
+    // } else {
+    //   console.log("error Klod");
+    // }
+  };
+
   return (
     <div>
       <MainMenu />
@@ -57,7 +47,7 @@ const signin = () => {
               Sign in to your account
             </h2>
           </div>
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <form className="mt-8 space-y-6">
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -66,8 +56,9 @@ const signin = () => {
                 </label>
                 <input
                   value={email}
-                  name={email}
-                  onChange={(e) => setEmail(e.detail.value)}
+                  id="email"
+                  name="email"
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   autoComplete="email"
                   required
@@ -80,11 +71,11 @@ const signin = () => {
                   Password
                 </label>
                 <input
-                  id={password}
-                  name={password}
-                  onIonChange={(e) => setPassword(e.detail.value)}
+                  value={password}
+                  id="password"
+                  name="password"
+                  onChange={(e) => setPassword(e.target.value)}
                   type="password"
-                  autoComplete="current-password"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                   placeholder="Password"

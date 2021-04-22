@@ -45,7 +45,7 @@ const RA_tab = () => {
   const onChange = (id, event) => {
     const keypartners_newInputFields = keypartners_inputFields.map((i) => {
       if (id === i.id) {
-        i[event.target.name] = event.target.id;
+        i[event.target.name] = event.target.value;
       }
       return i;
     });
@@ -154,7 +154,7 @@ const RA_tab = () => {
                                   onChange={(event) =>
                                     onChange(keypartners_inputField.id, event)
                                   }
-                                  id={keypartners_inputField.typeofrisk}
+                                  value={keypartners_inputField.typeofrisk}
                                   className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 >
                                   <option>Strategy Risk</option>
@@ -175,7 +175,7 @@ const RA_tab = () => {
                                     onChange={(event) =>
                                       onChange(keypartners_inputField.id, event)
                                     }
-                                    id={keypartners_inputField.risk}
+                                    value={keypartners_inputField.risk}
                                     type="text"
                                     name="risk"
                                     id="risk"
@@ -219,7 +219,7 @@ const RA_tab = () => {
                                   onChange={(event) =>
                                     onChange(keypartners_inputField.id, event)
                                   }
-                                  id={keypartners_inputField.financialrisk}
+                                  value={keypartners_inputField.financialrisk}
                                 />
                                 <datalist
                                   id="steplist"
@@ -258,7 +258,7 @@ const RA_tab = () => {
                                   onChange={(event) =>
                                     onChange(keypartners_inputField.id, event)
                                   }
-                                  id={keypartners_inputField.healthrisk}
+                                  value={keypartners_inputField.healthrisk}
                                 />
                                 <datalist
                                   id="steplist"
@@ -297,7 +297,7 @@ const RA_tab = () => {
                                   onChange={(event) =>
                                     onChange(keypartners_inputField.id, event)
                                   }
-                                  id={keypartners_inputField.naturalrisk}
+                                  value={keypartners_inputField.naturalrisk}
                                 />
                                 <datalist
                                   id="steplist"
@@ -336,7 +336,7 @@ const RA_tab = () => {
                                   onChange={(event) =>
                                     onChange(keypartners_inputField.id, event)
                                   }
-                                  id={keypartners_inputField.socialrisk}
+                                  value={keypartners_inputField.socialrisk}
                                 />
                                 <datalist
                                   id="steplist"
@@ -375,7 +375,7 @@ const RA_tab = () => {
                                   onChange={(event) =>
                                     onChange(keypartners_inputField.id, event)
                                   }
-                                  id={keypartners_inputField.governmentrisk}
+                                  value={keypartners_inputField.governmentrisk}
                                 />
                                 <datalist
                                   id="steplist"
@@ -414,7 +414,7 @@ const RA_tab = () => {
                                   onChange={(event) =>
                                     onChange(keypartners_inputField.id, event)
                                   }
-                                  id={keypartners_inputField.legalrisk}
+                                  value={keypartners_inputField.legalrisk}
                                 />
                                 <datalist
                                   id="steplist"
@@ -452,7 +452,7 @@ const RA_tab = () => {
                                   onChange={(event) =>
                                     onChange(keypartners_inputField.id, event)
                                   }
-                                  id={keypartners_inputField.likelihood}
+                                  value={keypartners_inputField.likelihood}
                                 />
                                 <label
                                   htmlFor="likelihood"
@@ -474,7 +474,7 @@ const RA_tab = () => {
                                 onChange={(event) =>
                                   onChange(keypartners_inputField.id, event)
                                 }
-                                id={keypartners_inputField.acceptance}
+                                value={keypartners_inputField.acceptance}
                                 id="typeofrisk"
                                 name="typeofrisk"
                                 autoComplete="typeofrisk"

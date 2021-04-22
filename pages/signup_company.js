@@ -30,7 +30,7 @@ const signup_company = () => {
   const onChange = (id, event) => {
     const newInputFields = inputFields.map((i) => {
       if (id === i.id) {
-        i[event.target.name] = event.target.id;
+        i[event.target.name] = event.target.value;
       }
       return i;
     });
@@ -380,6 +380,7 @@ const signup_company = () => {
                               onChange={(event) =>
                                 onChange(inputField.id, event)
                               }
+                              name="dept"
                               value={inputField.dept}
                               type="text"
                             />
