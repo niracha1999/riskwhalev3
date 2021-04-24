@@ -1,35 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { MainMenu } from "../components/MainMenu";
+import axios from "axios";
 
 import { TrashIcon } from "@heroicons/react/solid";
 import { v4 as uuidv4 } from "uuid";
 
-
 const mtpd_and_rto = () => {
+  const [data, setData] = useState({ users: [] });
   const [openTab, setOpenTab] = React.useState(0);
-  const [functionaldepartments, setfunctionaldepartments] = useState ([]);
-  useEffect(() => {
-    fetchItems();
-  }, []);
 
-  const fetchItems = async () => {
-    const data = await fetch(
+  useEffect(async () => {
+    const result = await axios(
       "http://localhost:1000/userinfo/608057b4ad90cf1786a9a8c5"
     );
-    console.log(data);
-    const items = await data.json();
-    setfunctionaldepartments(items.functionaldepartments);
-    console.log(items.functionaldepartments);
-  };
 
+    setData({
+      users: result,
+    });
+  }, []);
   return (
     <div>
       <MainMenu />
       <>
         <div className="pt-20">
-          <div class="flex-1 flex block">
+          <div className="flex-1 flex block">
             <nav class="fixed bg-blue-600 w-64 h-screen">
-              <div class="mt-10 mb-4">
+              <div className="mt-10 mb-4">
                 <li class="mb-2 px-4 py-4 text-gray-100 flex flex-row hover:text-blue-800  hover:bg-blue-300  hover:font-bold rounded rounded-lg">
                   <a
                     className={
@@ -101,23 +97,25 @@ const mtpd_and_rto = () => {
                             >
                               Fill-in MTPD of each area
                             </label>
+                            {data.users.map((user) => (
+                              <div className="h-6 ml-4 mt-4 flex rounded-md shadow-sm">
+                                <label className="text-sm pl-2 font-medium text-blue-700">
+                                  {user.functionaldepartments}
+                                </label>
 
-                            <div className="h-6 w-2/5 ml-4 mt-1 flex rounded-md shadow-sm">
-                              <label className="text-sm pl-2 font-medium text-blue-700">
-                                Financial
-                              </label>
-                              <input
-                                id="likelihood"
-                                name="objective"
-                                type="text"
-                                required
-                                className="ml-4 focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
-                                placeholder=" type number of day"
-                              />
-                              <label className="block text-sm pl-2 font-medium text-blue-700">
-                                day(s)
-                              </label>
-                            </div>
+                                <input
+                                  id="likelihood"
+                                  name="objective"
+                                  type="text"
+                                  required
+                                  className="ml-4 focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                  placeholder=" type number of day"
+                                />
+                                <label className="block text-sm pl-2 font-medium text-blue-700">
+                                  day(s)
+                                </label>
+                              </div>
+                            ))}
                           </div>
 
                           <div>
@@ -187,23 +185,27 @@ const mtpd_and_rto = () => {
                             >
                               Fill-in RTO of each area
                             </label>
-
-                            <div className="h-6 w-2/5 ml-4 mt-1 flex rounded-md shadow-sm">
-                              <label className="text-sm pl-2 font-medium text-blue-700">
-                                Financial
-                              </label>
-                              <input
-                                id="likelihood"
-                                name="objective"
-                                type="text"
-                                required
-                                className="ml-4 focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
-                                placeholder=" type number of day"
-                              />
-                              <label className="block text-sm pl-2 font-medium text-blue-700">
-                                day(s)
-                              </label>
-                            </div>
+                            {data.users.map((user) => (
+                              <div
+                                key={user.id}
+                                className="h-6 ml-4 mt-4 flex rounded-md shadow-sm"
+                              >
+                                <label className="text-sm pl-2 font-medium text-blue-700">
+                                  {user.name}
+                                </label>
+                                <input
+                                  id="likelihood"
+                                  name="objective"
+                                  type="text"
+                                  required
+                                  className="ml-4 focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                  placeholder=" type number of day"
+                                />
+                                <label className="block text-sm pl-2 font-medium text-blue-700">
+                                  day(s)
+                                </label>
+                              </div>
+                            ))}
                           </div>
 
                           <div>
@@ -247,10 +249,4 @@ const mtpd_and_rto = () => {
   );
 };
 
-export default function TabsRender() {
-  return (
-    <>
-      <mtpd_and_rto />;
-    </>
-  );
-}
+export default mtpd_and_rto;

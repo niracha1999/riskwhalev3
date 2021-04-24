@@ -104,10 +104,10 @@ const signin = () => {
               Don’t have account? Register for free!
             </label>
             <button className=" px-4 py-3 mt-10 h-full relative w-full flex justify-center  border border-transparent text-sm font-medium rounded-md text-white bg-lightblue-700 hover:bg-lightblue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lightblue-600">
-              Sign up as an individual
+              <a href="/signup_individual">Sign up as an individual</a>
             </button>
             <button className=" px-4 py-3 mt-4 h-full relative w-full flex justify-center  border border-transparent text-sm font-medium rounded-md text-white bg-lightblue-700 hover:bg-lightblue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lightblue-600">
-              Sign up as a company
+              <a href="/signup_company">Sign up as a company</a>
             </button>
           </div>
         </div>

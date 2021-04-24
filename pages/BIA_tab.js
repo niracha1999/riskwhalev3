@@ -6,12 +6,21 @@ import { v4 as uuidv4 } from "uuid";
 
 const BIA_tab = () => {
   const [openTab, setOpenTab] = React.useState(0);
+  const [data, setData] = useState({ users: [] });
+
+  useEffect(async () => {
+    const result = await axios("http://jsonplaceholder.typicode.com/users");
+
+    setData({
+      users: result.data,
+    });
+  }, []);
 
   const [activities, setActivities] = useState([
     {
       id: uuidv4(),
       activity: "",
-      resources: [],
+      resources: [{ name: "", typeofresource: "", amount: "" }],
     },
   ]);
   const onChangeActivity = (id, event) => {
@@ -30,7 +39,7 @@ const BIA_tab = () => {
       {
         id: uuidv4(),
         activity: "",
-        resources: [],
+        resources: [{ name: "", typeofresource: "", amount: "" }],
       },
     ]);
   };
@@ -165,7 +174,7 @@ const BIA_tab = () => {
                         <label className="block text-sm font-medium text-blue-800">
                           Objective of Operation
                         </label>
-                        <div className="h-6 w-5/6 mt-1 flex rounded-md shadow-sm">
+                        <div className="h-6 w-7/12 mt-1 flex rounded-md shadow-sm">
                           <input
                             id="likelihood"
                             name="objective"
@@ -180,16 +189,16 @@ const BIA_tab = () => {
                         </div>
                       </div>
                     </div>
-                    {activities.map((activity, i) => (
+                    {activities.map((activity) => (
                       <div
                         key={activity.id}
                         className="flex md:mt-0 md:col-span-2"
                       >
-                        <div className="relative my-4 w-full h-full shadow sm:rounded-md sm:overflow-hidden">
+                        <div className="relative my-4 w-full mx-14 shadow sm:rounded-md sm:overflow-hidden">
                           <div className="py-5 bg-white space-y-6 sm:p-6">
                             <div>
                               <label className="block pb-2 text-sm font-medium text-blue-800">
-                                Activity #{i + 1}
+                                Activity
                               </label>
                               <input
                                 id="activity"
@@ -205,13 +214,13 @@ const BIA_tab = () => {
                               />
                             </div>
                             {activity.resources.map((resource, ri) => (
-                              <div className="flex" key={ri}>
+                              <div className="flex">
                                 <div className="col-span-6 sm:col-span-3 lg:col-span-3">
                                   <label
                                     htmlFor="resource"
                                     className="block text-sm font-medium text-blue-800"
                                   >
-                                    Resource #{ri + 1}
+                                    Resource
                                   </label>
                                   <div className="h-6 w-80 mt-1 mr-4 flex rounded-md shadow-sm ">
                                     <input
@@ -309,20 +318,20 @@ const BIA_tab = () => {
                               </div>
                             ))}
                           </div>
-                        </div>
-                        <div>
-                          <button
-                            onClick={() => onAddActivity()}
-                            className="justify-self-center mt-2 text-sm inline-flex py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                          >
-                            add activity
-                          </button>
-                          <button
-                            onClick={() => onDeleteActivity(activity.id)}
-                            className="justify-self-center mt-2 text-sm inline-flex py-2 mx-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
-                          >
-                            delete activity
-                          </button>
+                          <div className="flex justify-center mb-12">
+                            <button
+                              onClick={() => onAddActivity()}
+                              className="justify-self-center mt-2 text-sm inline-flex py-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            >
+                              add activity
+                            </button>
+                            <button
+                              onClick={() => onDeleteActivity(activity.id)}
+                              className="justify-self-center mt-2 text-sm inline-flex py-2 mx-2 px-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                            >
+                              delete activity
+                            </button>
+                          </div>
                         </div>
                       </div>
                     ))}
