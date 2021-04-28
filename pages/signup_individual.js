@@ -1,6 +1,7 @@
 import { MainMenu } from "../components/MainMenu";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import { TrashIcon } from "@heroicons/react/solid";
 import { v4 as uuidv4 } from "uuid";
@@ -12,8 +13,50 @@ const ScrollToPoint1 = () => {
   });
 };
 
-function signup_individual() {
+const signup_individual = () => {
   const [inputFields, setInputFields] = useState([{ id: uuidv4(), dept: "" }]);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [retypepassword, setRetypepassword] = useState("");
+  const [firstname, setFirstname] = useState("");
+  const [occupation, setOccupation] = useState("");
+  const [institute, setInstitute] = useState("");
+  const [userID, setUserID] = useState("");
+
+  const authen = () => {
+
+      axios.post("http://localhost:1000/user/signup-indiv", {
+        email: email,
+        password: password,
+        retypepassword: retypepassword,
+        firstname: firstname,
+        occupation: occupation,
+        institute: institute,
+      })
+      .then((response) => {
+        const userID = response.data;
+
+          if (token === "invalid username or password") {
+            console.log("Bugg invalid username or password");
+            setEmail("");
+            setPass("");
+            setShowToast(true);
+          } else {
+            localStorage.setItem("token", token);
+
+            history.push("/myWarranty");
+          }
+      })
+      .catch((error) => {
+        console.log("error catched");
+      });
+
+    console.log(localStorage.getItem("userID"));
+  };
+
+  const saveTokeninLocalStorage = (tokendetails) => {
+    localStorage.setItem("userID", JSON.stringify(tokendetails));
+  };
 
   return (
     <div>
@@ -50,6 +93,8 @@ function signup_individual() {
                       </label>
                       <div className="mt-1 w-6/12 flex rounded-md shadow-sm">
                         <input
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                           type="text"
                           name="email"
                           id="email"
@@ -71,6 +116,9 @@ function signup_individual() {
                     </label>
                     <div className="h-6 w-6/12 mt-1 flex rounded-md shadow-sm ">
                       <input
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        type="password"
                         id="password"
                         name="password"
                         autoComplete="password"
@@ -83,17 +131,19 @@ function signup_individual() {
 
                   <div>
                     <label
-                      htmlFor="password2"
+                      htmlFor="retypepassword"
                       className="block text-sm font-medium text-blue-800"
                     >
                       Re-type Password
                     </label>
                     <div className="h-6 w-6/12 mt-1 flex rounded-md shadow-sm ">
                       <input
-                        id="password2"
-                        name="password2"
+                        value={retypepassword}
+                        onChange={(e) => setRetypepassword(e.target.value)}
+                        id="retypepassword"
+                        name="retypepassword"
                         type="password"
-                        autoComplete="password2"
+                        autoComplete="retypepassword"
                         required
                         className=" focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
                         placeholder=" type password again to confirm"
@@ -146,9 +196,11 @@ function signup_individual() {
                         Full name
                       </label>
                       <input
+                        value={firstname}
+                        onChange={(e) => setFirstname(e.target.value)}
                         type="text"
-                        name="first_name"
-                        id="first_name"
+                        name="firstname"
+                        id="firstname"
                         className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
                     </div>
@@ -162,9 +214,11 @@ function signup_individual() {
                           Occupation
                         </label>
                         <input
+                          value={occupation}
+                          onChange={(e) => setOccupation(e.target.value)}
                           type="text"
-                          name="first_name"
-                          id="first_name"
+                          name="occupation"
+                          id="occupation"
                           className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
@@ -179,9 +233,11 @@ function signup_individual() {
                           Institute or Organization Name
                         </label>
                         <input
+                          value={institute}
+                          onChange={(e) => setInstitute(e.target.value)}
                           type="text"
-                          name="first_name"
-                          id="first_name"
+                          name="institute"
+                          id="institute"
                           className="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                       </div>
@@ -200,13 +256,16 @@ function signup_individual() {
         </div>
 
         <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
-          <button className=" w-56 inline-flex justify-center my-24 px-4 p-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+          <button
+            onClick={authen}
+            className=" w-56 inline-flex justify-center my-24 px-4 p-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
             Register
           </button>
         </div>
       </>
     </div>
   );
-}
+};
 
 export default signup_individual;

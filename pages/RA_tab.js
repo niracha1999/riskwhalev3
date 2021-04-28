@@ -439,27 +439,22 @@ const RA_tab = () => {
                                 Likelihood
                               </label>
                               <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
-                                <input
-                                  id="likelihood"
-                                  name="likelihood"
-                                  type="number"
-                                  min="1"
-                                  max="100"
-                                  autoComplete="likelihood"
-                                  required
-                                  className="focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
-                                  placeholder=" 1-100"
+                                <select
                                   onChange={(event) =>
                                     onChange(keypartners_inputField.id, event)
                                   }
                                   value={keypartners_inputField.likelihood}
-                                />
-                                <label
-                                  htmlFor="likelihood"
-                                  className="block text-sm font-medium text-blue-800"
+                                  id="likelihood"
+                                  name="likelihood"
+                                  placeholder="choose one"
+                                  className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 >
-                                  %
-                                </label>
+                                  <option>Improbable</option>
+                                  <option>Remote</option>
+                                  <option>Occasional</option>
+                                  <option>Probable</option>
+                                  <option>Frequent</option>
+                                </select>
                               </div>
                             </div>
 
@@ -470,23 +465,24 @@ const RA_tab = () => {
                               >
                                 Level of Acceptance
                               </label>
-                              <select
-                                onChange={(event) =>
-                                  onChange(keypartners_inputField.id, event)
-                                }
-                                value={keypartners_inputField.acceptance}
-                                id="typeofrisk"
-                                name="typeofrisk"
-                                autoComplete="typeofrisk"
-                                placeholder="choose one"
-                                className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                              >
-                                <option>Desirable</option>
-                                <option>Acceptable</option>
-                                <option>Undesirable</option>
-                                <option>Unacceptable</option>
-                                <option>Catastrophic</option>
-                              </select>
+                              <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                <select
+                                  onChange={(event) =>
+                                    onChange(keypartners_inputField.id, event)
+                                  }
+                                  value={keypartners_inputField.acceptance}
+                                  id="typeofrisk"
+                                  name="typeofrisk"
+                                  autoComplete="typeofrisk"
+                                  className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                >
+                                  <option>Desirable</option>
+                                  <option>Acceptable</option>
+                                  <option>Undesirable</option>
+                                  <option>Unacceptable</option>
+                                  <option>Catastrophic</option>
+                                </select>
+                              </div>
                             </div>
                           </div>
 

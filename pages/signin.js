@@ -11,24 +11,32 @@ const signin = () => {
 
   let history = useHistory();
 
-  const dataK = {
-    email: email,
-    password: password,
-  };
+  const authen = () => {
+    axios
+      .post("http://localhost:1000/user/login", {
+        email: email,
+        password: password,
+      })
+      .then((response) => {
+        console.log(response);
 
-  const authen = async () => {
-    const data = await fetch("http://localhost:1000/user/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(dataK),
-    });
+        if (response.data) {
+          const token = response.data;
 
-    console.log(data);
-    // if (data.status === 200) {
-    //   console.log("login successful");
-    // } else {
-    //   console.log("error Klod");
-    // }
+          if (token === "invalid username or password") {
+            console.log("invalid username or password");
+            setEmail("");
+            setPassword("");
+          } else {
+            localStorage.setItem("token", token);
+
+            history.push("/index");
+          }
+        } else if (response.data === "Incorrect") {
+        }
+        console.log(localStorage.token);
+      })
+      .catch((error) => console.log(error));
   };
 
   return (
@@ -51,7 +59,7 @@ const signin = () => {
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
-                <label htmlFor="email-address" className="sr-only">
+                <label htmlFor="email" className="sr-only">
                   Email address
                 </label>
                 <input

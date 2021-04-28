@@ -6,16 +6,17 @@ import { TrashIcon } from "@heroicons/react/solid";
 import { v4 as uuidv4 } from "uuid";
 
 const mtpd_and_rto = () => {
-  const [data, setData] = useState({ users: [] });
+  const [data, setData] = useState({ areas: [] });
   const [openTab, setOpenTab] = React.useState(0);
 
   useEffect(async () => {
     const result = await axios(
-      "http://localhost:1000/userinfo/608057b4ad90cf1786a9a8c5"
+      "http://localhost:1000/userinfo/6085434bd772e64fc51e2646"
     );
 
+    console.log(result.data.functionaldepartments);
     setData({
-      users: result,
+      areas: result.data.functionaldepartments,
     });
   }, []);
   return (
@@ -97,10 +98,13 @@ const mtpd_and_rto = () => {
                             >
                               Fill-in MTPD of each area
                             </label>
-                            {data.users.map((user) => (
-                              <div className="h-6 ml-4 mt-4 flex rounded-md shadow-sm">
+                            {data.areas.map((area) => (
+                              <div
+                                key={area._id}
+                                className="h-6 ml-4 mt-4 flex rounded-md shadow-sm"
+                              >
                                 <label className="text-sm pl-2 font-medium text-blue-700">
-                                  {user.functionaldepartments}
+                                  {area.name}
                                 </label>
 
                                 <input
@@ -185,13 +189,13 @@ const mtpd_and_rto = () => {
                             >
                               Fill-in RTO of each area
                             </label>
-                            {data.users.map((user) => (
+                            {data.areas.map((area) => (
                               <div
-                                key={user.id}
+                                key={area._id}
                                 className="h-6 ml-4 mt-4 flex rounded-md shadow-sm"
                               >
                                 <label className="text-sm pl-2 font-medium text-blue-700">
-                                  {user.name}
+                                  {area.name}
                                 </label>
                                 <input
                                   id="likelihood"
