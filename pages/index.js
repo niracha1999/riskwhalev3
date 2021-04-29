@@ -33,9 +33,10 @@ export default function Home() {
                     </span>
                   </h1>
                   <p className="mt-3 text-base text-blue-800 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                    Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure
-                    qui lorem cupidatat commodo. Elit sunt amet fugiat veniam
-                    occaecat fugiat aliqua.
+                    Get your plans and procedures to ensure that the critical
+                    organizational operations required to keep an organization
+                    running continue to operate during events when key
+                    dependencies of operations are disrupted.
                   </p>
                   <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                     <div className="rounded-md shadow">

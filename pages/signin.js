@@ -1,42 +1,47 @@
 import { MainMenu } from "../components/MainMenu";
-import React, { SyntheticEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 const signin = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showToast, setShowToast] = useState(false);
 
-  let history = useHistory();
-
-  const authen = () => {
-    axios
-      .post("http://localhost:1000/user/login", {
+  const authen = async () => {
+    await axios
+      .post("http://api-riskwhale.herokuapp.com/user/login", {
         email: email,
         password: password,
       })
       .then((response) => {
         console.log(response);
 
-        if (response.data) {
-          const token = response.data;
+        const usertype = response.data.type;
+        const token = response.data.authtoken;
 
-          if (token === "invalid username or password") {
-            console.log("invalid username or password");
-            setEmail("");
-            setPassword("");
+        if (
+          response.data === "Password is wrong" ||
+          response.data === "Please confirm the information"
+        ) {
+          console.log("Bugg from front");
+        } else {
+          localStorage.setItem("usertype", usertype);
+          localStorage.setItem("token", token);
+          console.log(localStorage.usertype);
+          console.log(localStorage.token);
+          if (usertype === "company") {
+            router.push("/functions_company");
           } else {
-            localStorage.setItem("token", token);
-
-            history.push("/index");
+            router.push("functions_individual");
           }
-        } else if (response.data === "Incorrect") {
         }
-        console.log(localStorage.token);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -44,18 +49,25 @@ const signin = () => {
       <MainMenu />
 
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
+        <div className="mt-36 max-w-md w-full space-y-8">
           <div>
             <img
               className="mx-auto h-20 w-auto"
               src="./assets/main_label.png"
-              alt="Workflow"
+              alt="main_label"
             />
             <h2 className="mt-6 text-center text-3xl font-bold text-blue-600">
               Sign in to your account
             </h2>
           </div>
-          <form className="mt-8 space-y-6">
+          <form
+            method="post"
+            className="mt-8 space-y-6"
+            onSubmit={(e) => {
+              e.preventDefault();
+              authen();
+            }}
+          >
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
@@ -93,7 +105,7 @@ const signin = () => {
 
             <div>
               <button
-                onClick={authen}
+                type="submit"
                 className="group h-full relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">

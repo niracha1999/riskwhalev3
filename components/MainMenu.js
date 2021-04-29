@@ -1,13 +1,23 @@
 import Link from "next/link";
 import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
-import { UserIcon, MenuIcon, XIcon } from "@heroicons/react/solid";
+import { MenuIcon, XIcon } from "@heroicons/react/solid";
+
+import { useRouter } from "next/router";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export const MainMenu = () => {
+  const router = useRouter();
+  const isSigned = () => {
+    if (localStorage.token === "undefined") {
+      router.push("/signin");
+    } else {
+      router.push("/profile");
+    }
+  };
   return (
     <Popover className=" bg-white fixed z-40 w-full">
       {({ open }) => (
@@ -94,7 +104,7 @@ export const MainMenu = () => {
               </Popover.Group>
 
               <a
-                href="/signin"
+                onClick={isSigned}
                 className=" ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
               >
                 Account
@@ -165,7 +175,7 @@ export const MainMenu = () => {
                     Account
                   </a>
                   <a
-                    href="/signin"
+                    onClick={isSigned}
                     className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
                   >
                     Account

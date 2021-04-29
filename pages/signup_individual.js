@@ -1,10 +1,8 @@
 import { MainMenu } from "../components/MainMenu";
 
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
-
-import { TrashIcon } from "@heroicons/react/solid";
-import { v4 as uuidv4 } from "uuid";
 
 const ScrollToPoint1 = () => {
   window.scrollTo({
@@ -14,18 +12,18 @@ const ScrollToPoint1 = () => {
 };
 
 const signup_individual = () => {
-  const [inputFields, setInputFields] = useState([{ id: uuidv4(), dept: "" }]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [retypepassword, setRetypepassword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [occupation, setOccupation] = useState("");
   const [institute, setInstitute] = useState("");
-  const [userID, setUserID] = useState("");
 
-  const authen = () => {
+  let history = useHistory();
 
-      axios.post("http://localhost:1000/user/signup-indiv", {
+  const authen = async () => {
+    await axios
+      .post("http://api-riskwhale.herokuapp.com/user/signup-indiv", {
         email: email,
         password: password,
         retypepassword: retypepassword,
@@ -34,28 +32,21 @@ const signup_individual = () => {
         institute: institute,
       })
       .then((response) => {
-        const userID = response.data;
+        console.log(response);
 
-          if (token === "invalid username or password") {
-            console.log("Bugg invalid username or password");
-            setEmail("");
-            setPass("");
-            setShowToast(true);
-          } else {
-            localStorage.setItem("token", token);
+        const user = response.data.user;
 
-            history.push("/myWarranty");
-          }
+        if (response.data === "Email already exist") {
+          console.log("Bugg from front");
+        } else {
+          localStorage.setItem("user", user);
+          console.log(localStorage.user);
+          history.push("/signin");
+        }
       })
       .catch((error) => {
-        console.log("error catched");
+        console.log(error);
       });
-
-    console.log(localStorage.getItem("userID"));
-  };
-
-  const saveTokeninLocalStorage = (tokendetails) => {
-    localStorage.setItem("userID", JSON.stringify(tokendetails));
   };
 
   return (

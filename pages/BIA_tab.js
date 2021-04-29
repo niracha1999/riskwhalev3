@@ -10,8 +10,10 @@ const BIA_tab = () => {
   const [data, setData] = useState({ areas: [] });
 
   useEffect(async () => {
-    const result = await axios(
-      "http://localhost:1000/userinfo/6085434bd772e64fc51e2646"
+    const user = localStorage.user;
+    console.log(user);
+    const result = await axios.get(
+      "http://api-riskwhale.herokuapp.com/userinfo/" + user
     );
 
     console.log(result.data.functionaldepartments);
