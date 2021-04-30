@@ -1,7 +1,13 @@
 import { MainMenu } from "../components/MainMenu";
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 import React, { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/router";
 
 import { TrashIcon } from "@heroicons/react/solid";
 import { v4 as uuidv4 } from "uuid";
@@ -21,6 +27,8 @@ const ScrollToPoint2 = () => {
 };
 
 const signup_company = () => {
+  const router = useRouter();
+
   const [inputFields, setInputFields] = useState([{ id: uuidv4(), dept: "" }]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -64,14 +72,11 @@ const signup_company = () => {
         .then((response) => {
           console.log(email);
           console.log(response);
-          const user = response.data.id_company;
-
           if (response.data === "Email already exist") {
             console.log("Bugg from front");
           } else {
-            localStorage.setItem("user", user);
-            console.log(localStorage.user);
-            history.push("/signin");
+            createNotification();
+            router.push("/signin");
           }
         })
         .catch((error) => {
@@ -80,6 +85,10 @@ const signup_company = () => {
     } else {
       console.log("password is not the same");
     }
+  };
+
+  const createNotification = () => {
+    NotificationManager.success("Success message", "Title here", 5000);
   };
 
   const addField = () => {

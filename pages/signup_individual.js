@@ -1,8 +1,14 @@
 import { MainMenu } from "../components/MainMenu";
 
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { useRouter } from "next/router";
 import axios from "axios";
+
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 const ScrollToPoint1 = () => {
   window.scrollTo({
@@ -12,14 +18,14 @@ const ScrollToPoint1 = () => {
 };
 
 const signup_individual = () => {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [retypepassword, setRetypepassword] = useState("");
   const [firstname, setFirstname] = useState("");
   const [occupation, setOccupation] = useState("");
   const [institute, setInstitute] = useState("");
-
-  let history = useHistory();
 
   const authen = async () => {
     await axios
@@ -34,14 +40,12 @@ const signup_individual = () => {
       .then((response) => {
         console.log(response);
 
-        const user = response.data.user;
-
         if (response.data === "Email already exist") {
           console.log("Bugg from front");
         } else {
-          localStorage.setItem("user", user);
-          console.log(localStorage.user);
-          history.push("/signin");
+          NotificationManager.success("Success message", "Title here", 5000);
+
+          router.push("/signin");
         }
       })
       .catch((error) => {
