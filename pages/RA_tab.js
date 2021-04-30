@@ -7,6 +7,8 @@ import { v4 as uuidv4 } from "uuid";
 const RA_tab = () => {
   const [openTab, setOpenTab] = React.useState(0);
 
+
+
   const [keypartners_inputFields, keypartners_setInputFields] = React.useState([
     {
       id: uuidv4(),
@@ -61,6 +63,475 @@ const RA_tab = () => {
     );
     keypartners_setInputFields(values);
   };
+
+  const [
+    keyactivities_inputFields,
+    keyactivities_setInputFields,
+  ] = React.useState([
+    {
+      id: uuidv4(),
+      keyactivities_typeofrisk: "",
+      keyactivities_risk: "",
+      keyactivities_financialrisk: "",
+      keyactivities_healthrisk: "",
+      keyactivities_naturalrisk: "",
+      keyactivities_socialrisk: "",
+      keyactivities_governmentrisk: "",
+      keyactivities_legalrisk: "",
+      keyactivities_likelihood: "",
+      keyactivities_acceptance: "",
+    },
+  ]);
+
+  const keyactivities_addRisk = () => {
+    keyactivities_setInputFields([
+      ...keyactivities_inputFields,
+      {
+        id: uuidv4(),
+        keyactivities_typeofrisk: "",
+        keyactivities_risk: "",
+        keyactivities_financialrisk: "",
+        keyactivities_healthrisk: "",
+        keyactivities_naturalrisk: "",
+        keyactivities_socialrisk: "",
+        keyactivities_governmentrisk: "",
+        keyactivities_legalrisk: "",
+        keyactivities_likelihood: "",
+        keyactivities_acceptance: "",
+      },
+    ]);
+  };
+
+  const keyactivities_onChange = (id, event) => {
+    const keyactivities_newInputFields = keyactivities_inputFields.map((i) => {
+      if (id === i.id) {
+        i[event.target.name] = event.target.value;
+      }
+      return i;
+    });
+
+    keyactivities_setInputFields(keyactivities_newInputFields);
+  };
+
+  const keyactivities_removeField = (id) => {
+    const values = [...keyactivities_inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    keyactivities_setInputFields(values);
+  };
+
+  const [
+    keyresources_inputFields,
+    keyresources_setInputFields,
+  ] = React.useState([
+    {
+      id: uuidv4(),
+      keyresources_typeofrisk: "",
+      keyresources_risk: "",
+      keyresources_financialrisk: "",
+      keyresources_healthrisk: "",
+      keyresources_naturalrisk: "",
+      keyresources_socialrisk: "",
+      keyresources_governmentrisk: "",
+      keyresources_legalrisk: "",
+      keyresources_likelihood: "",
+      keyresources_acceptance: "",
+    },
+  ]);
+
+  const keyresources_addRisk = () => {
+    keyresources_setInputFields([
+      ...keyresources_inputFields,
+      {
+        id: uuidv4(),
+        keyresources_typeofrisk: "",
+        keyresources_risk: "",
+        keyresources_financialrisk: "",
+        keyresources_healthrisk: "",
+        keyresources_naturalrisk: "",
+        keyresources_socialrisk: "",
+        keyresources_governmentrisk: "",
+        keyresources_legalrisk: "",
+        keyresources_likelihood: "",
+        keyresources_acceptance: "",
+      },
+    ]);
+  };
+
+  const keyresources_onChange = (id, event) => {
+    const keyresources_newInputFields = keyresources_inputFields.map((i) => {
+      if (id === i.id) {
+        i[event.target.name] = event.target.value;
+      }
+      return i;
+    });
+
+    keyresources_setInputFields(keyresources_newInputFields);
+  };
+
+  const keyresources_removeField = (id) => {
+    const values = [...keyresources_inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    keyresources_setInputFields(values);
+  };
+
+  const [
+    valueproposition_inputFields,
+    valueproposition_setInputFields,
+  ] = React.useState([
+    {
+      id: uuidv4(),
+      valueproposition_typeofrisk: "",
+      valueproposition_risk: "",
+      valueproposition_financialrisk: "",
+      valueproposition_healthrisk: "",
+      valueproposition_naturalrisk: "",
+      valueproposition_socialrisk: "",
+      valueproposition_governmentrisk: "",
+      valueproposition_legalrisk: "",
+      valueproposition_likelihood: "",
+      valueproposition_acceptance: "",
+    },
+  ]);
+
+  const valueproposition_addRisk = () => {
+    valueproposition_setInputFields([
+      ...valueproposition_inputFields,
+      {
+        id: uuidv4(),
+        valueproposition_typeofrisk: "",
+        valueproposition_risk: "",
+        valueproposition_financialrisk: "",
+        valueproposition_healthrisk: "",
+        valueproposition_naturalrisk: "",
+        valueproposition_socialrisk: "",
+        valueproposition_governmentrisk: "",
+        valueproposition_legalrisk: "",
+        valueproposition_likelihood: "",
+        valueproposition_acceptance: "",
+      },
+    ]);
+  };
+
+  const valueproposition_onChange = (id, event) => {
+    const valueproposition_newInputFields = valueproposition_inputFields.map(
+      (i) => {
+        if (id === i.id) {
+          i[event.target.name] = event.target.value;
+        }
+        return i;
+      }
+    );
+
+    valueproposition_setInputFields(valueproposition_newInputFields);
+  };
+
+  const valueproposition_removeField = (id) => {
+    const values = [...valueproposition_inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    valueproposition_setInputFields(values);
+  };
+
+  const [
+    customerrelationships_inputFields,
+    customerrelationships_setInputFields,
+  ] = React.useState([
+    {
+      id: uuidv4(),
+      customerrelationships_typeofrisk: "",
+      customerrelationships_risk: "",
+      customerrelationships_financialrisk: "",
+      customerrelationships_healthrisk: "",
+      customerrelationships_naturalrisk: "",
+      customerrelationships_socialrisk: "",
+      customerrelationships_governmentrisk: "",
+      customerrelationships_legalrisk: "",
+      customerrelationships_likelihood: "",
+      customerrelationships_acceptance: "",
+    },
+  ]);
+
+  const customerrelationships_addRisk = () => {
+    customerrelationships_setInputFields([
+      ...customerrelationships_inputFields,
+      {
+        id: uuidv4(),
+        customerrelationships_typeofrisk: "",
+        customerrelationships_risk: "",
+        customerrelationships_financialrisk: "",
+        customerrelationships_healthrisk: "",
+        customerrelationships_naturalrisk: "",
+        customerrelationships_socialrisk: "",
+        customerrelationships_governmentrisk: "",
+        customerrelationships_legalrisk: "",
+        customerrelationships_likelihood: "",
+        customerrelationships_acceptance: "",
+      },
+    ]);
+  };
+
+  const customerrelationships_onChange = (id, event) => {
+    const customerrelationships_newInputFields = customerrelationships_inputFields.map(
+      (i) => {
+        if (id === i.id) {
+          i[event.target.name] = event.target.value;
+        }
+        return i;
+      }
+    );
+
+    customerrelationships_setInputFields(customerrelationships_newInputFields);
+  };
+
+  const customerrelationships_removeField = (id) => {
+    const values = [...customerrelationships_inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    customerrelationships_setInputFields(values);
+  };
+
+  const [channels_inputFields, channels_setInputFields] = React.useState([
+    {
+      id: uuidv4(),
+      channels_typeofrisk: "",
+      channels_risk: "",
+      channels_financialrisk: "",
+      channels_healthrisk: "",
+      channels_naturalrisk: "",
+      channels_socialrisk: "",
+      channels_governmentrisk: "",
+      channels_legalrisk: "",
+      channels_likelihood: "",
+      channels_acceptance: "",
+    },
+  ]);
+
+  const channels_addRisk = () => {
+    channels_setInputFields([
+      ...channels_inputFields,
+      {
+        id: uuidv4(),
+        channels_typeofrisk: "",
+        channels_risk: "",
+        channels_financialrisk: "",
+        channels_healthrisk: "",
+        channels_naturalrisk: "",
+        channels_socialrisk: "",
+        channels_governmentrisk: "",
+        channels_legalrisk: "",
+        channels_likelihood: "",
+        channels_acceptance: "",
+      },
+    ]);
+  };
+
+  const channels_onChange = (id, event) => {
+    const channels_newInputFields = channels_inputFields.map((i) => {
+      if (id === i.id) {
+        i[event.target.name] = event.target.value;
+      }
+      return i;
+    });
+
+    channels_setInputFields(channels_newInputFields);
+  };
+
+  const channels_removeField = (id) => {
+    const values = [...channels_inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    channels_setInputFields(values);
+  };
+
+  const [
+    customersegments_inputFields,
+    customersegments_setInputFields,
+  ] = React.useState([
+    {
+      id: uuidv4(),
+      customersegments_typeofrisk: "",
+      customersegments_risk: "",
+      customersegments_financialrisk: "",
+      customersegments_healthrisk: "",
+      customersegments_naturalrisk: "",
+      customersegments_socialrisk: "",
+      customersegments_governmentrisk: "",
+      customersegments_legalrisk: "",
+      customersegments_likelihood: "",
+      customersegments_acceptance: "",
+    },
+  ]);
+
+  const customersegments_addRisk = () => {
+    customersegments_setInputFields([
+      ...customersegments_inputFields,
+      {
+        id: uuidv4(),
+        customersegments_typeofrisk: "",
+        customersegments_risk: "",
+        customersegments_financialrisk: "",
+        customersegments_healthrisk: "",
+        customersegments_naturalrisk: "",
+        customersegments_socialrisk: "",
+        customersegments_governmentrisk: "",
+        customersegments_legalrisk: "",
+        customersegments_likelihood: "",
+        customersegments_acceptance: "",
+      },
+    ]);
+  };
+
+  const customersegments_onChange = (id, event) => {
+    const customersegments_newInputFields = customersegments_inputFields.map(
+      (i) => {
+        if (id === i.id) {
+          i[event.target.name] = event.target.value;
+        }
+        return i;
+      }
+    );
+
+    customersegments_setInputFields(customersegments_newInputFields);
+  };
+
+  const customersegments_removeField = (id) => {
+    const values = [...customersegments_inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    customersegments_setInputFields(values);
+  };
+
+  const [
+    coststructure_inputFields,
+    coststructure_setInputFields,
+  ] = React.useState([
+    {
+      id: uuidv4(),
+      coststructure_typeofrisk: "",
+      coststructure_risk: "",
+      coststructure_financialrisk: "",
+      coststructure_healthrisk: "",
+      coststructure_naturalrisk: "",
+      coststructure_socialrisk: "",
+      coststructure_governmentrisk: "",
+      coststructure_legalrisk: "",
+      coststructure_likelihood: "",
+      coststructure_acceptance: "",
+    },
+  ]);
+
+  const coststructure_addRisk = () => {
+    coststructure_setInputFields([
+      ...coststructure_inputFields,
+      {
+        id: uuidv4(),
+        coststructure_typeofrisk: "",
+        coststructure_risk: "",
+        coststructure_financialrisk: "",
+        coststructure_healthrisk: "",
+        coststructure_naturalrisk: "",
+        coststructure_socialrisk: "",
+        coststructure_governmentrisk: "",
+        coststructure_legalrisk: "",
+        coststructure_likelihood: "",
+        coststructure_acceptance: "",
+      },
+    ]);
+  };
+
+  const coststructure_onChange = (id, event) => {
+    const coststructure_newInputFields = coststructure_inputFields.map((i) => {
+      if (id === i.id) {
+        i[event.target.name] = event.target.value;
+      }
+      return i;
+    });
+
+    coststructure_setInputFields(coststructure_newInputFields);
+  };
+
+  const coststructure_removeField = (id) => {
+    const values = [...coststructure_inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    coststructure_setInputFields(values);
+  };
+
+  const [
+    revenuestreams_inputFields,
+    revenuestreams_setInputFields,
+  ] = React.useState([
+    {
+      id: uuidv4(),
+      revenuestreams_typeofrisk: "",
+      revenuestreams_risk: "",
+      revenuestreams_financialrisk: "",
+      revenuestreams_healthrisk: "",
+      revenuestreams_naturalrisk: "",
+      revenuestreams_socialrisk: "",
+      revenuestreams_governmentrisk: "",
+      revenuestreams_legalrisk: "",
+      revenuestreams_likelihood: "",
+      revenuestreams_acceptance: "",
+    },
+  ]);
+
+  const revenuestreams_addRisk = () => {
+    revenuestreams_setInputFields([
+      ...revenuestreams_inputFields,
+      {
+        id: uuidv4(),
+        revenuestreams_typeofrisk: "",
+        revenuestreams_risk: "",
+        revenuestreams_financialrisk: "",
+        revenuestreams_healthrisk: "",
+        revenuestreams_naturalrisk: "",
+        revenuestreams_socialrisk: "",
+        revenuestreams_governmentrisk: "",
+        revenuestreams_legalrisk: "",
+        revenuestreams_likelihood: "",
+        revenuestreams_acceptance: "",
+      },
+    ]);
+  };
+
+  const revenuestreams_onChange = (id, event) => {
+    const revenuestreams_newInputFields = revenuestreams_inputFields.map(
+      (i) => {
+        if (id === i.id) {
+          i[event.target.name] = event.target.value;
+        }
+        return i;
+      }
+    );
+
+    revenuestreams_setInputFields(revenuestreams_newInputFields);
+  };
+
+  const revenuestreams_removeField = (id) => {
+    const values = [...revenuestreams_inputFields];
+    values.splice(
+      values.findIndex((value) => value.id === id),
+      1
+    );
+    revenuestreams_setInputFields(values);
+  };
   return (
     <div>
       <MainMenu />
@@ -111,7 +582,97 @@ const RA_tab = () => {
                     data-toggle="tab"
                     href="#link3"
                   >
+                    <span class="ml-2">Key Resources</span>
+                  </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-100 flex flex-row hover:text-blue-800  hover:bg-blue-300  hover:font-bold rounded rounded-lg">
+                  <a
+                    className={
+                      openTab === 4 ? "text-cream font-bold" : "text-blue-100"
+                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpenTab(4);
+                    }}
+                    data-toggle="tab"
+                    href="#link4"
+                  >
                     <span class="ml-2">Value Propositions</span>
+                  </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-100 flex flex-row hover:text-blue-800  hover:bg-blue-300  hover:font-bold rounded rounded-lg">
+                  <a
+                    className={
+                      openTab === 5 ? "text-cream font-bold" : "text-blue-100"
+                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpenTab(5);
+                    }}
+                    data-toggle="tab"
+                    href="#link5"
+                  >
+                    <span class="ml-2">Customer Relationships</span>
+                  </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-100 flex flex-row hover:text-blue-800  hover:bg-blue-300  hover:font-bold rounded rounded-lg">
+                  <a
+                    className={
+                      openTab === 6 ? "text-cream font-bold" : "text-blue-100"
+                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpenTab(6);
+                    }}
+                    data-toggle="tab"
+                    href="#link6"
+                  >
+                    <span class="ml-2">Channels</span>
+                  </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-100 flex flex-row hover:text-blue-800  hover:bg-blue-300  hover:font-bold rounded rounded-lg">
+                  <a
+                    className={
+                      openTab === 7 ? "text-cream font-bold" : "text-blue-100"
+                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpenTab(7);
+                    }}
+                    data-toggle="tab"
+                    href="#link7"
+                  >
+                    <span class="ml-2">Customer Segments</span>
+                  </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-100 flex flex-row hover:text-blue-800  hover:bg-blue-300  hover:font-bold rounded rounded-lg">
+                  <a
+                    className={
+                      openTab === 8 ? "text-cream font-bold" : "text-blue-100"
+                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpenTab(8);
+                    }}
+                    data-toggle="tab"
+                    href="#link3"
+                  >
+                    <span class="ml-2">Cost Structure</span>
+                  </a>
+                </li>
+                <li class="mb-2 px-4 py-4 text-gray-100 flex flex-row hover:text-blue-800  hover:bg-blue-300  hover:font-bold rounded rounded-lg">
+                  <a
+                    className={
+                      openTab === 9 ? "text-cream font-bold" : "text-blue-100"
+                    }
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setOpenTab(9);
+                    }}
+                    data-toggle="tab"
+                    href="#link3"
+                  >
+                    <span class="ml-2">Revenue Streams</span>
                   </a>
                 </li>
               </div>
@@ -210,6 +771,8 @@ const RA_tab = () => {
                                 </label>
                                 <input
                                   type="range"
+                                  id="financialrisk"
+                                  name="financialrisk"
                                   min="1"
                                   max="5"
                                   step="1"
@@ -249,6 +812,8 @@ const RA_tab = () => {
                                 </label>
                                 <input
                                   type="range"
+                                  id="healthrisk"
+                                  name="healthrisk"
                                   min="1"
                                   max="5"
                                   step="1"
@@ -287,6 +852,8 @@ const RA_tab = () => {
                                   Least Impact
                                 </label>
                                 <input
+                                  id="naturalrisk"
+                                  name="naturalrisk"
                                   type="range"
                                   min="1"
                                   max="5"
@@ -327,6 +894,8 @@ const RA_tab = () => {
                                 </label>
                                 <input
                                   type="range"
+                                  id="socialrisk"
+                                  name="socialrisk"
                                   min="1"
                                   max="5"
                                   step="1"
@@ -366,6 +935,8 @@ const RA_tab = () => {
                                 </label>
                                 <input
                                   type="range"
+                                  id="governmentrisk"
+                                  name="governmentrisk"
                                   min="1"
                                   max="5"
                                   step="1"
@@ -405,6 +976,8 @@ const RA_tab = () => {
                                 </label>
                                 <input
                                   type="range"
+                                  id="legalrisk"
+                                  name="legalrisk"
                                   min="1"
                                   max="5"
                                   step="1"
@@ -446,7 +1019,6 @@ const RA_tab = () => {
                                   value={keypartners_inputField.likelihood}
                                   id="likelihood"
                                   name="likelihood"
-                                  placeholder="choose one"
                                   className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 >
                                   <option>Improbable</option>
@@ -471,9 +1043,8 @@ const RA_tab = () => {
                                     onChange(keypartners_inputField.id, event)
                                   }
                                   value={keypartners_inputField.acceptance}
-                                  id="typeofrisk"
-                                  name="typeofrisk"
-                                  autoComplete="typeofrisk"
+                                  id="acceptance"
+                                  name="acceptance"
                                   className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 >
                                   <option>Desirable</option>
@@ -491,7 +1062,7 @@ const RA_tab = () => {
                             onClick={() =>
                               removeField(keypartners_inputField.id)
                             }
-                            className="items-self-center relative"
+                            className="relative ml-96"
                           >
                             <TrashIcon
                               className="h-5 w-5 text-red-500 group-hover:text-red-400"
@@ -502,7 +1073,7 @@ const RA_tab = () => {
                         <div className="flex justify-center">
                           <button
                             onClick={addRisk}
-                            className="justify-self-center mt-2 text-sm inline-flex py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            className="justify-self-center mt-2 ml-56 text-sm inline-flex py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                           >
                             add more risk
                           </button>
@@ -512,25 +1083,3370 @@ const RA_tab = () => {
                   </span>
                 </div>
                 <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-                  <p>
-                    Completely synergize resource taxing relationships via
-                    premier niche markets. Professionally cultivate one-to-one
-                    customer service with robust ideas.
-                    <br />
-                    <br />
-                    Dynamically innovate resource-leveling customer service for
-                    state of the art customer service.
-                  </p>
+                  <span>
+                    <div className="md:col-span-1 pl-14">
+                      <div className=" sm:px-0">
+                        <h3 className="text-3xl font-semibold leading-10 text-blue-800">
+                          Key Activities
+                        </h3>
+                        <p className="mt-1 text-sm text-blue-800">
+                          (input from user)
+                        </p>
+                      </div>
+                    </div>
+                    {keyactivities_inputFields.map(
+                      (keyactivities_inputField) => (
+                        <div
+                          key={keyactivities_inputField.id}
+                          className="md:mt-0 md:col-span-2"
+                        >
+                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                            <div className="py-5 bg-white space-y-6 sm:p-6">
+                              <div className="w-full grid grid-cols-3 gap-6">
+                                <div className="col-span-6 sm:col-span-3">
+                                  <label
+                                    htmlFor="typeofrisk"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Type of Risk
+                                  </label>
+                                  <select
+                                    id="keyactivities_typeofrisk"
+                                    name="keyactivities_typeofrisk"
+                                    autoComplete="keyactivities_typeofrisk"
+                                    placeholder="choose one"
+                                    onChange={(event) =>
+                                      keyactivities_onChange(
+                                        keyactivities_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={keyactivities_inputField.typeofrisk}
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Strategy Risk</option>
+                                    <option>Operational Risk</option>
+                                    <option>Financial Risk</option>
+                                    <option>Compliance Risk</option>
+                                  </select>
+                                </div>
+                                <div className="col-span-3 sm:col-span-2">
+                                  <label
+                                    htmlFor="email"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Risk
+                                  </label>
+                                  <div className="mt-1 flex rounded-md shadow-sm">
+                                    <textarea
+                                      onChange={(event) =>
+                                        keyactivities_onChange(
+                                          keyactivities_inputField.id,
+                                          event
+                                        )
+                                      }
+                                      value={keyactivities_inputField.risk}
+                                      type="text"
+                                      name="keyactivities_risk"
+                                      id="keyactivities_risk"
+                                      autoComplete="keyactivities_risk"
+                                      required
+                                      className="focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                      placeholder=" identify a risk"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div>
+                                <label
+                                  htmlFor="password"
+                                  className="block pb-2 text-sm font-medium text-blue-800"
+                                >
+                                  Impacts
+                                </label>
+
+                                <div className="rounded-md shadow-sm pb-2">
+                                  <label
+                                    htmlFor="financial"
+                                    className="pt-4 pr-6 text-sm font-medium text-blue-600"
+                                  >
+                                    Financial
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="keyactivities_financialrisk"
+                                    name="keyactivities_financialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      keyactivities_onChange(
+                                        keyactivities_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      keyactivities_inputField.financialrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Health and safety
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="keyactivities_healthrisk"
+                                    name="keyactivities_healthrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      keyactivities_onChange(
+                                        keyactivities_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={keyactivities_inputField.healthrisk}
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Natural environment
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    id="keyactivities_naturalrisk"
+                                    name="keyactivities_naturalrisk"
+                                    type="range"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      keyactivities_onChange(
+                                        keyactivities_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={keyactivities_inputField.naturalrisk}
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Social / Cultutal Heritage
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="keyactivities_socialrisk"
+                                    name="keyactivities_socialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      keyactivities_onChange(
+                                        keyactivities_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={keyactivities_inputField.socialrisk}
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Government / Reputation
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="keyactivities_governmentrisk"
+                                    name="keyactivities_governmentrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      keyactivities_onChange(
+                                        keyactivities_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      keyactivities_inputField.governmentrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Legal
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="keyactivities_legalrisk"
+                                    name="keyactivities_legalrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      keyactivities_onChange(
+                                        keyactivities_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={keyactivities_inputField.legalrisk}
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="col-span-6 sm:col-span-3 lg:col-span-3">
+                                <label className="block text-sm font-medium text-blue-800">
+                                  Likelihood
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      keyactivities_onChange(
+                                        keyactivities_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={keyactivities_inputField.likelihood}
+                                    id="keyactivities_likelihood"
+                                    name="keyactivities_likelihood"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Improbable</option>
+                                    <option>Remote</option>
+                                    <option>Occasional</option>
+                                    <option>Probable</option>
+                                    <option>Frequent</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div className="col-span-6 sm:col-span-3">
+                                <label
+                                  htmlFor="acceptance"
+                                  className="block text-sm font-medium text-blue-800"
+                                >
+                                  Level of Acceptance
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      keyactivities_onChange(
+                                        keyactivities_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={keyactivities_inputField.acceptance}
+                                    id="keyactivities_acceptance"
+                                    name="keyactivities_acceptance"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Desirable</option>
+                                    <option>Acceptable</option>
+                                    <option>Undesirable</option>
+                                    <option>Unacceptable</option>
+                                    <option>Catastrophic</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <button
+                              disabled={keyactivities_inputFields.length === 1}
+                              onClick={() =>
+                                keyactivities_removeField(
+                                  keyactivities_inputField.id
+                                )
+                              }
+                              className="items-self-center ml-96 relative"
+                            >
+                              <TrashIcon
+                                className="h-5 w-5 text-red-500 group-hover:text-red-400"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </div>
+                          <div className="flex justify-center">
+                            <button
+                              onClick={keyactivities_addRisk}
+                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            >
+                              add more risk
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </span>
                 </div>
                 <div className={openTab === 3 ? "block" : "hidden"} id="link3">
-                  <p>
-                    Efficiently unleash cross-media information without
-                    cross-media value. Quickly maximize timely deliverables for
-                    real-time schemas.
-                    <br />
-                    <br /> Dramatically maintain clicks-and-mortar solutions
-                    without functional solutions.
-                  </p>
+                  <span>
+                    <div className="md:col-span-1 pl-14">
+                      <div className=" sm:px-0">
+                        <h3 className="text-3xl font-semibold leading-10 text-blue-800">
+                          Key Resources
+                        </h3>
+                        <p className="mt-1 text-sm text-blue-800">
+                          (input from user)
+                        </p>
+                      </div>
+                    </div>
+                    {keyresources_inputFields.map((keyresources_inputField) => (
+                      <div
+                        key={keyresources_inputField.id}
+                        className="md:mt-0 md:col-span-2"
+                      >
+                        <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                          <div className="py-5 bg-white space-y-6 sm:p-6">
+                            <div className="w-full grid grid-cols-3 gap-6">
+                              <div className="col-span-6 sm:col-span-3">
+                                <label
+                                  htmlFor="typeofrisk"
+                                  className="block text-sm font-medium text-blue-800"
+                                >
+                                  Type of Risk
+                                </label>
+                                <select
+                                  id="keyresources_typeofrisk"
+                                  name="keyresources_typeofrisk"
+                                  autoComplete="keyresources_typeofrisk"
+                                  placeholder="choose one"
+                                  onChange={(event) =>
+                                    keyresources_onChange(
+                                      keyresources_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={keyresources_inputField.typeofrisk}
+                                  className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                >
+                                  <option>Strategy Risk</option>
+                                  <option>Operational Risk</option>
+                                  <option>Financial Risk</option>
+                                  <option>Compliance Risk</option>
+                                </select>
+                              </div>
+                              <div className="col-span-3 sm:col-span-2">
+                                <label
+                                  htmlFor="email"
+                                  className="block text-sm font-medium text-blue-800"
+                                >
+                                  Risk
+                                </label>
+                                <div className="mt-1 flex rounded-md shadow-sm">
+                                  <textarea
+                                    onChange={(event) =>
+                                      keyresources_onChange(
+                                        keyresources_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={keyresources_inputField.risk}
+                                    type="text"
+                                    name="keyresources_risk"
+                                    id="keyresources_risk"
+                                    autoComplete="keyresources_risk"
+                                    required
+                                    className="focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                    placeholder=" identify a risk"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div>
+                              <label
+                                htmlFor="password"
+                                className="block pb-2 text-sm font-medium text-blue-800"
+                              >
+                                Impacts
+                              </label>
+
+                              <div className="rounded-md shadow-sm pb-2">
+                                <label
+                                  htmlFor="financial"
+                                  className="pt-4 pr-6 text-sm font-medium text-blue-600"
+                                >
+                                  Financial
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  type="range"
+                                  id="keyresources_financialrisk"
+                                  name="keyresources_financialrisk"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    keyresources_onChange(
+                                      keyresources_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={keyresources_inputField.financialrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                              <div className="pb-2 rounded-md shadow-sm ">
+                                <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                  Health and safety
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  type="range"
+                                  id="keyresources_healthrisk"
+                                  name="keyresources_healthrisk"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    keyresources_onChange(
+                                      keyresources_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={keyresources_inputField.healthrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                              <div className="pb-2 rounded-md shadow-sm ">
+                                <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                  Natural environment
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  id="keyresources_naturalrisk"
+                                  name="keyresources_naturalrisk"
+                                  type="range"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    keyresources_onChange(
+                                      keyresources_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={keyresources_inputField.naturalrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                              <div className="pb-2 rounded-md shadow-sm ">
+                                <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                  Social / Cultutal Heritage
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  type="range"
+                                  id="keyresources_socialrisk"
+                                  name="keyresources_socialrisk"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    keyresources_onChange(
+                                      keyresources_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={keyresources_inputField.socialrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                              <div className="pb-2 rounded-md shadow-sm ">
+                                <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                  Government / Reputation
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  type="range"
+                                  id="keyresources_governmentrisk"
+                                  name="keyresources_governmentrisk"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    keyresources_onChange(
+                                      keyresources_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={keyresources_inputField.governmentrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                              <div className="pb-2 rounded-md shadow-sm ">
+                                <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                  Legal
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  type="range"
+                                  id="keyresources_legalrisk"
+                                  name="keyresources_legalrisk"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    keyresources_onChange(
+                                      keyresources_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={keyresources_inputField.legalrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                            </div>
+                            <div className="col-span-6 sm:col-span-3 lg:col-span-3">
+                              <label className="block text-sm font-medium text-blue-800">
+                                Likelihood
+                              </label>
+                              <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                <select
+                                  onChange={(event) =>
+                                    keyresources_onChange(
+                                      keyresources_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={keyresources_inputField.likelihood}
+                                  id="keyresources_likelihood"
+                                  name="keyresources_likelihood"
+                                  className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                >
+                                  <option>Improbable</option>
+                                  <option>Remote</option>
+                                  <option>Occasional</option>
+                                  <option>Probable</option>
+                                  <option>Frequent</option>
+                                </select>
+                              </div>
+                            </div>
+
+                            <div className="col-span-6 sm:col-span-3">
+                              <label
+                                htmlFor="acceptance"
+                                className="block text-sm font-medium text-blue-800"
+                              >
+                                Level of Acceptance
+                              </label>
+                              <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                <select
+                                  onChange={(event) =>
+                                    keyresources_onChange(
+                                      keyresources_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={keyresources_inputField.acceptance}
+                                  id="keyresources_acceptance"
+                                  name="keyresources_acceptance"
+                                  className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                >
+                                  <option>Desirable</option>
+                                  <option>Acceptable</option>
+                                  <option>Undesirable</option>
+                                  <option>Unacceptable</option>
+                                  <option>Catastrophic</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                          <button
+                            disabled={keyresources_inputFields.length === 1}
+                            onClick={() =>
+                              keyresources_removeField(
+                                keyresources_inputField.id
+                              )
+                            }
+                            className="items-self-center ml-96 relative"
+                          >
+                            <TrashIcon
+                              className="h-5 w-5 text-red-500 group-hover:text-red-400"
+                              aria-hidden="true"
+                            />
+                          </button>
+                        </div>
+                        <div className="flex justify-center">
+                          <button
+                            onClick={keyresources_addRisk}
+                            className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                          >
+                            add more risk
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </span>
+                </div>
+                <div className={openTab === 4 ? "block" : "hidden"} id="link4">
+                  <span>
+                    <div className="md:col-span-1 pl-14">
+                      <div className=" sm:px-0">
+                        <h3 className="text-3xl font-semibold leading-10 text-blue-800">
+                          Value Propositions
+                        </h3>
+                        <p className="mt-1 text-sm text-blue-800">
+                          (input from user)
+                        </p>
+                      </div>
+                    </div>
+                    {valueproposition_inputFields.map(
+                      (valueproposition_inputField) => (
+                        <div
+                          key={valueproposition_inputField.id}
+                          className="md:mt-0 md:col-span-2"
+                        >
+                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                            <div className="py-5 bg-white space-y-6 sm:p-6">
+                              <div className="w-full grid grid-cols-3 gap-6">
+                                <div className="col-span-6 sm:col-span-3">
+                                  <label
+                                    htmlFor="typeofrisk"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Type of Risk
+                                  </label>
+                                  <select
+                                    id="keyresources_typeofrisk"
+                                    name="keyresources_typeofrisk"
+                                    autoComplete="keyresources_typeofrisk"
+                                    placeholder="choose one"
+                                    onChange={(event) =>
+                                      valueproposition_onChange(
+                                        valueproposition_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      valueproposition_inputField.typeofrisk
+                                    }
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Strategy Risk</option>
+                                    <option>Operational Risk</option>
+                                    <option>Financial Risk</option>
+                                    <option>Compliance Risk</option>
+                                  </select>
+                                </div>
+                                <div className="col-span-3 sm:col-span-2">
+                                  <label
+                                    htmlFor="email"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Risk
+                                  </label>
+                                  <div className="mt-1 flex rounded-md shadow-sm">
+                                    <textarea
+                                      onChange={(event) =>
+                                        valueproposition_onChange(
+                                          valueproposition_inputField.id,
+                                          event
+                                        )
+                                      }
+                                      value={valueproposition_inputField.risk}
+                                      type="text"
+                                      name="keyresources_risk"
+                                      id="keyresources_risk"
+                                      autoComplete="keyresources_risk"
+                                      required
+                                      className="focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                      placeholder=" identify a risk"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div>
+                                <label
+                                  htmlFor="password"
+                                  className="block pb-2 text-sm font-medium text-blue-800"
+                                >
+                                  Impacts
+                                </label>
+
+                                <div className="rounded-md shadow-sm pb-2">
+                                  <label
+                                    htmlFor="financial"
+                                    className="pt-4 pr-6 text-sm font-medium text-blue-600"
+                                  >
+                                    Financial
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="valueproposition_financialrisk"
+                                    name="valueproposition_financialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      valueproposition_onChange(
+                                        valueproposition_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      valueproposition_inputField.financialrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Health and safety
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="valueproposition_healthrisk"
+                                    name="valueproposition_healthrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      valueproposition_onChange(
+                                        valueproposition_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      valueproposition_inputField.healthrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Natural environment
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    id="valueproposition_naturalrisk"
+                                    name="valueproposition_naturalrisk"
+                                    type="range"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      valueproposition_onChange(
+                                        valueproposition_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      valueproposition_inputField.naturalrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Social / Cultutal Heritage
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="valueproposition_socialrisk"
+                                    name="valueproposition_socialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      valueproposition_onChange(
+                                        valueproposition_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      valueproposition_inputField.socialrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Government / Reputation
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="valueproposition_governmentrisk"
+                                    name="valueproposition_governmentrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      valueproposition_onChange(
+                                        valueproposition_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      valueproposition_inputField.governmentrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Legal
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="valueproposition_legalrisk"
+                                    name="valueproposition_legalrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      valueproposition_onChange(
+                                        valueproposition_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      valueproposition_inputField.legalrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="col-span-6 sm:col-span-3 lg:col-span-3">
+                                <label className="block text-sm font-medium text-blue-800">
+                                  Likelihood
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      valueproposition_onChange(
+                                        valueproposition_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      valueproposition_inputField.likelihood
+                                    }
+                                    id="valueproposition_likelihood"
+                                    name="valueproposition_likelihood"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Improbable</option>
+                                    <option>Remote</option>
+                                    <option>Occasional</option>
+                                    <option>Probable</option>
+                                    <option>Frequent</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div className="col-span-6 sm:col-span-3">
+                                <label
+                                  htmlFor="acceptance"
+                                  className="block text-sm font-medium text-blue-800"
+                                >
+                                  Level of Acceptance
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      valueproposition_onChange(
+                                        valueproposition_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      valueproposition_inputField.acceptance
+                                    }
+                                    id="valueproposition_acceptance"
+                                    name="valueproposition_acceptance"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Desirable</option>
+                                    <option>Acceptable</option>
+                                    <option>Undesirable</option>
+                                    <option>Unacceptable</option>
+                                    <option>Catastrophic</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <button
+                              disabled={
+                                valueproposition_inputFields.length === 1
+                              }
+                              onClick={() =>
+                                valueproposition_removeField(
+                                  valueproposition_inputField.id
+                                )
+                              }
+                              className="items-self-center ml-96 relative"
+                            >
+                              <TrashIcon
+                                className="h-5 w-5 text-red-500 group-hover:text-red-400"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </div>
+                          <div className="flex justify-center">
+                            <button
+                              onClick={valueproposition_addRisk}
+                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            >
+                              add more risk
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </span>
+                </div>
+                <div className={openTab === 5 ? "block" : "hidden"} id="link5">
+                  <span>
+                    <div className="md:col-span-1 pl-14">
+                      <div className=" sm:px-0">
+                        <h3 className="text-3xl font-semibold leading-10 text-blue-800">
+                          Customer Relationships
+                        </h3>
+                        <p className="mt-1 text-sm text-blue-800">
+                          (input from user)
+                        </p>
+                      </div>
+                    </div>
+                    {customerrelationships_inputFields.map(
+                      (customerrelationships_inputField) => (
+                        <div
+                          key={customerrelationships_inputField.id}
+                          className="md:mt-0 md:col-span-2"
+                        >
+                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                            <div className="py-5 bg-white space-y-6 sm:p-6">
+                              <div className="w-full grid grid-cols-3 gap-6">
+                                <div className="col-span-6 sm:col-span-3">
+                                  <label
+                                    htmlFor="typeofrisk"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Type of Risk
+                                  </label>
+                                  <select
+                                    id="customerrelationships_typeofrisk"
+                                    name="customerrelationships_typeofrisk"
+                                    autoComplete="customerrelationships_typeofrisk"
+                                    placeholder="choose one"
+                                    onChange={(event) =>
+                                      customerrelationships_onChange(
+                                        customerrelationships_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customerrelationships_inputField.typeofrisk
+                                    }
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Strategy Risk</option>
+                                    <option>Operational Risk</option>
+                                    <option>Financial Risk</option>
+                                    <option>Compliance Risk</option>
+                                  </select>
+                                </div>
+                                <div className="col-span-3 sm:col-span-2">
+                                  <label
+                                    htmlFor="email"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Risk
+                                  </label>
+                                  <div className="mt-1 flex rounded-md shadow-sm">
+                                    <textarea
+                                      onChange={(event) =>
+                                        customerrelationships_onChange(
+                                          customerrelationships_inputField.id,
+                                          event
+                                        )
+                                      }
+                                      value={
+                                        customerrelationships_inputField.risk
+                                      }
+                                      type="text"
+                                      name="customerrelationships_risk"
+                                      id="customerrelationships_risk"
+                                      autoComplete="customerrelationships_risk"
+                                      required
+                                      className="focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                      placeholder=" identify a risk"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div>
+                                <label
+                                  htmlFor="password"
+                                  className="block pb-2 text-sm font-medium text-blue-800"
+                                >
+                                  Impacts
+                                </label>
+
+                                <div className="rounded-md shadow-sm pb-2">
+                                  <label
+                                    htmlFor="financial"
+                                    className="pt-4 pr-6 text-sm font-medium text-blue-600"
+                                  >
+                                    Financial
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="customerrelationships_financialrisk"
+                                    name="customerrelationships_financialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customerrelationships_onChange(
+                                        customerrelationships_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customerrelationships_inputField.financialrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Health and safety
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="customerrelationships_healthrisk"
+                                    name="customerrelationships_healthrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customerrelationships_onChange(
+                                        customerrelationships_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customerrelationships_inputField.healthrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Natural environment
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    id="customerrelationships_naturalrisk"
+                                    name="customerrelationships_naturalrisk"
+                                    type="range"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customerrelationships_onChange(
+                                        customerrelationships_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customerrelationships_inputField.naturalrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Social / Cultutal Heritage
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="customerrelationships_socialrisk"
+                                    name="customerrelationships_socialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customerrelationships_onChange(
+                                        customerrelationships_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customerrelationships_inputField.socialrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Government / Reputation
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="customerrelationships_governmentrisk"
+                                    name="customerrelationships_governmentrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customerrelationships_onChange(
+                                        customerrelationships_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customerrelationships_inputField.governmentrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Legal
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="customerrelationships_legalrisk"
+                                    name="customerrelationships_legalrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customerrelationships_onChange(
+                                        customerrelationships_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customerrelationships_inputField.legalrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="col-span-6 sm:col-span-3 lg:col-span-3">
+                                <label className="block text-sm font-medium text-blue-800">
+                                  Likelihood
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      customerrelationships_onChange(
+                                        customerrelationships_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customerrelationships_inputField.likelihood
+                                    }
+                                    id="customerrelationships_likelihood"
+                                    name="customerrelationships_likelihood"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Improbable</option>
+                                    <option>Remote</option>
+                                    <option>Occasional</option>
+                                    <option>Probable</option>
+                                    <option>Frequent</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div className="col-span-6 sm:col-span-3">
+                                <label
+                                  htmlFor="acceptance"
+                                  className="block text-sm font-medium text-blue-800"
+                                >
+                                  Level of Acceptance
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      customerrelationships_onChange(
+                                        customerrelationships_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customerrelationships_inputField.acceptance
+                                    }
+                                    id="customerrelationships_acceptance"
+                                    name="customerrelationships_acceptance"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Desirable</option>
+                                    <option>Acceptable</option>
+                                    <option>Undesirable</option>
+                                    <option>Unacceptable</option>
+                                    <option>Catastrophic</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <button
+                              disabled={
+                                customerrelationships_inputFields.length === 1
+                              }
+                              onClick={() =>
+                                customerrelationships_removeField(
+                                  customerrelationships_inputField.id
+                                )
+                              }
+                              className="items-self-center ml-96 relative"
+                            >
+                              <TrashIcon
+                                className="h-5 w-5 text-red-500 group-hover:text-red-400"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </div>
+                          <div className="flex justify-center">
+                            <button
+                              onClick={customerrelationships_addRisk}
+                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            >
+                              add more risk
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </span>
+                </div>
+                <div className={openTab === 6 ? "block" : "hidden"} id="link6">
+                  <span>
+                    <div className="md:col-span-1 pl-14">
+                      <div className=" sm:px-0">
+                        <h3 className="text-3xl font-semibold leading-10 text-blue-800">
+                          Channels
+                        </h3>
+                        <p className="mt-1 text-sm text-blue-800">
+                          (input from user)
+                        </p>
+                      </div>
+                    </div>
+                    {channels_inputFields.map((channels_inputField) => (
+                      <div
+                        key={channels_inputField.id}
+                        className="md:mt-0 md:col-span-2"
+                      >
+                        <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                          <div className="py-5 bg-white space-y-6 sm:p-6">
+                            <div className="w-full grid grid-cols-3 gap-6">
+                              <div className="col-span-6 sm:col-span-3">
+                                <label
+                                  htmlFor="typeofrisk"
+                                  className="block text-sm font-medium text-blue-800"
+                                >
+                                  Type of Risk
+                                </label>
+                                <select
+                                  id="channels_typeofrisk"
+                                  name="channels_typeofrisk"
+                                  autoComplete="channels_typeofrisk"
+                                  placeholder="choose one"
+                                  onChange={(event) =>
+                                    channels_onChange(
+                                      channels_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={channels_inputField.typeofrisk}
+                                  className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                >
+                                  <option>Strategy Risk</option>
+                                  <option>Operational Risk</option>
+                                  <option>Financial Risk</option>
+                                  <option>Compliance Risk</option>
+                                </select>
+                              </div>
+                              <div className="col-span-3 sm:col-span-2">
+                                <label
+                                  htmlFor="email"
+                                  className="block text-sm font-medium text-blue-800"
+                                >
+                                  Risk
+                                </label>
+                                <div className="mt-1 flex rounded-md shadow-sm">
+                                  <textarea
+                                    onChange={(event) =>
+                                      channels_onChange(
+                                        channels_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={channels_inputField.risk}
+                                    type="text"
+                                    name="channels_risk"
+                                    id="channels_risk"
+                                    autoComplete="channels_risk"
+                                    required
+                                    className="focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                    placeholder=" identify a risk"
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div>
+                              <label
+                                htmlFor="password"
+                                className="block pb-2 text-sm font-medium text-blue-800"
+                              >
+                                Impacts
+                              </label>
+
+                              <div className="rounded-md shadow-sm pb-2">
+                                <label
+                                  htmlFor="financial"
+                                  className="pt-4 pr-6 text-sm font-medium text-blue-600"
+                                >
+                                  Financial
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  type="range"
+                                  id="channels_financialrisk"
+                                  name="channels_financialrisk"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    channels_onChange(
+                                      channels_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={channels_inputField.financialrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                              <div className="pb-2 rounded-md shadow-sm ">
+                                <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                  Health and safety
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  type="range"
+                                  id="channels_healthrisk"
+                                  name="channels_healthrisk"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    channels_onChange(
+                                      channels_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={channels_inputField.healthrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                              <div className="pb-2 rounded-md shadow-sm ">
+                                <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                  Natural environment
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  id="channels_naturalrisk"
+                                  name="channels_naturalrisk"
+                                  type="range"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    channels_onChange(
+                                      channels_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={channels_inputField.naturalrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                              <div className="pb-2 rounded-md shadow-sm ">
+                                <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                  Social / Cultutal Heritage
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  type="range"
+                                  id="channels_socialrisk"
+                                  name="channels_socialrisk"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    channels_onChange(
+                                      channels_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={channels_inputField.socialrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                              <div className="pb-2 rounded-md shadow-sm ">
+                                <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                  Government / Reputation
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  type="range"
+                                  id="channels_governmentrisk"
+                                  name="channels_governmentrisk"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    channels_onChange(
+                                      channels_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={channels_inputField.governmentrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                              <div className="pb-2 rounded-md shadow-sm ">
+                                <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                  Legal
+                                </label>
+
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Least Impact
+                                </label>
+                                <input
+                                  type="range"
+                                  id="channels_legalrisk"
+                                  name="channels_legalrisk"
+                                  min="1"
+                                  max="5"
+                                  step="1"
+                                  list="steplist"
+                                  className="mx-5 text-blue-400"
+                                  color="blue"
+                                  onChange={(event) =>
+                                    channels_onChange(
+                                      channels_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={channels_inputField.legalrisk}
+                                />
+                                <datalist
+                                  id="steplist"
+                                  className="text-blue-400"
+                                >
+                                  <option label="1">1</option>
+                                  <option label="2">2</option>
+                                  <option label="3">3</option>
+                                  <option label="4">4</option>
+                                  <option label="5">5</option>
+                                </datalist>
+                                <label className="pt-4 text-xs font-medium text-gray-400">
+                                  Most Impact
+                                </label>
+                              </div>
+                            </div>
+                            <div className="col-span-6 sm:col-span-3 lg:col-span-3">
+                              <label className="block text-sm font-medium text-blue-800">
+                                Likelihood
+                              </label>
+                              <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                <select
+                                  onChange={(event) =>
+                                    channels_onChange(
+                                      channels_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={channels_inputField.likelihood}
+                                  id="channels_likelihood"
+                                  name="channels_likelihood"
+                                  className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                >
+                                  <option>Improbable</option>
+                                  <option>Remote</option>
+                                  <option>Occasional</option>
+                                  <option>Probable</option>
+                                  <option>Frequent</option>
+                                </select>
+                              </div>
+                            </div>
+
+                            <div className="col-span-6 sm:col-span-3">
+                              <label
+                                htmlFor="acceptance"
+                                className="block text-sm font-medium text-blue-800"
+                              >
+                                Level of Acceptance
+                              </label>
+                              <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                <select
+                                  onChange={(event) =>
+                                    channels_onChange(
+                                      channels_inputField.id,
+                                      event
+                                    )
+                                  }
+                                  value={channels_inputField.acceptance}
+                                  id="channels_acceptance"
+                                  name="channels_acceptance"
+                                  className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                >
+                                  <option>Desirable</option>
+                                  <option>Acceptable</option>
+                                  <option>Undesirable</option>
+                                  <option>Unacceptable</option>
+                                  <option>Catastrophic</option>
+                                </select>
+                              </div>
+                            </div>
+                          </div>
+
+                          <button
+                            disabled={channels_inputFields.length === 1}
+                            onClick={() =>
+                              channels_removeField(channels_inputField.id)
+                            }
+                            className="items-self-center ml-96 relative"
+                          >
+                            <TrashIcon
+                              className="h-5 w-5 text-red-500 group-hover:text-red-400"
+                              aria-hidden="true"
+                            />
+                          </button>
+                        </div>
+                        <div className="flex justify-center">
+                          <button
+                            onClick={channels_addRisk}
+                            className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                          >
+                            add more risk
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </span>
+                </div>
+                <div className={openTab === 7 ? "block" : "hidden"} id="link7">
+                  <span>
+                    <div className="md:col-span-1 pl-14">
+                      <div className=" sm:px-0">
+                        <h3 className="text-3xl font-semibold leading-10 text-blue-800">
+                          Customer Segments
+                        </h3>
+                        <p className="mt-1 text-sm text-blue-800">
+                          (input from user)
+                        </p>
+                      </div>
+                    </div>
+                    {customersegments_inputFields.map(
+                      (customersegments_inputField) => (
+                        <div
+                          key={customersegments_inputField.id}
+                          className="md:mt-0 md:col-span-2"
+                        >
+                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                            <div className="py-5 bg-white space-y-6 sm:p-6">
+                              <div className="w-full grid grid-cols-3 gap-6">
+                                <div className="col-span-6 sm:col-span-3">
+                                  <label
+                                    htmlFor="typeofrisk"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Type of Risk
+                                  </label>
+                                  <select
+                                    id="customersegments_typeofrisk"
+                                    name="customersegments_typeofrisk"
+                                    autoComplete="customersegments_typeofrisk"
+                                    placeholder="choose one"
+                                    onChange={(event) =>
+                                      customersegments_onChange(
+                                        customersegments_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customersegments_inputField.typeofrisk
+                                    }
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Strategy Risk</option>
+                                    <option>Operational Risk</option>
+                                    <option>Financial Risk</option>
+                                    <option>Compliance Risk</option>
+                                  </select>
+                                </div>
+                                <div className="col-span-3 sm:col-span-2">
+                                  <label
+                                    htmlFor="email"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Risk
+                                  </label>
+                                  <div className="mt-1 flex rounded-md shadow-sm">
+                                    <textarea
+                                      onChange={(event) =>
+                                        customersegments_onChange(
+                                          customersegments_inputField.id,
+                                          event
+                                        )
+                                      }
+                                      value={customersegments_inputField.risk}
+                                      type="text"
+                                      name="customersegments_risk"
+                                      id="customersegments_risk"
+                                      autoComplete="customersegments_risk"
+                                      required
+                                      className="focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                      placeholder=" identify a risk"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div>
+                                <label
+                                  htmlFor="password"
+                                  className="block pb-2 text-sm font-medium text-blue-800"
+                                >
+                                  Impacts
+                                </label>
+
+                                <div className="rounded-md shadow-sm pb-2">
+                                  <label
+                                    htmlFor="financial"
+                                    className="pt-4 pr-6 text-sm font-medium text-blue-600"
+                                  >
+                                    Financial
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="customersegments_financialrisk"
+                                    name="customersegments_financialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customersegments_onChange(
+                                        customersegments_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customersegments_inputField.financialrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Health and safety
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="customersegments_healthrisk"
+                                    name="customersegments_healthrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customersegments_onChange(
+                                        customersegments_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customersegments_inputField.healthrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Natural environment
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    id="customersegments_naturalrisk"
+                                    name="customersegments_naturalrisk"
+                                    type="range"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customersegments_onChange(
+                                        customersegments_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customersegments_inputField.naturalrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Social / Cultutal Heritage
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="customersegments_socialrisk"
+                                    name="customersegments_socialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customersegments_onChange(
+                                        customersegments_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customersegments_inputField.socialrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Government / Reputation
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="customersegments_governmentrisk"
+                                    name="customersegments_governmentrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customersegments_onChange(
+                                        customersegments_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customersegments_inputField.governmentrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Legal
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="customersegments_legalrisk"
+                                    name="customersegments_legalrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      customersegments_onChange(
+                                        customersegments_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customersegments_inputField.legalrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="col-span-6 sm:col-span-3 lg:col-span-3">
+                                <label className="block text-sm font-medium text-blue-800">
+                                  Likelihood
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      customersegments_onChange(
+                                        customersegments_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customersegments_inputField.likelihood
+                                    }
+                                    id="customersegments_likelihood"
+                                    name="customersegments_likelihood"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Improbable</option>
+                                    <option>Remote</option>
+                                    <option>Occasional</option>
+                                    <option>Probable</option>
+                                    <option>Frequent</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div className="col-span-6 sm:col-span-3">
+                                <label
+                                  htmlFor="acceptance"
+                                  className="block text-sm font-medium text-blue-800"
+                                >
+                                  Level of Acceptance
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      customersegments_onChange(
+                                        customersegments_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      customersegments_inputField.acceptance
+                                    }
+                                    id="customersegments_acceptance"
+                                    name="customersegments_acceptance"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Desirable</option>
+                                    <option>Acceptable</option>
+                                    <option>Undesirable</option>
+                                    <option>Unacceptable</option>
+                                    <option>Catastrophic</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <button
+                              disabled={
+                                customersegments_inputFields.length === 1
+                              }
+                              onClick={() =>
+                                customersegments_removeField(
+                                  customersegments_inputField.id
+                                )
+                              }
+                              className="items-self-center ml-96 relative"
+                            >
+                              <TrashIcon
+                                className="h-5 w-5 text-red-500 group-hover:text-red-400"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </div>
+                          <div className="flex justify-center">
+                            <button
+                              onClick={customersegments_addRisk}
+                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            >
+                              add more risk
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </span>
+                </div>
+                <div className={openTab === 8 ? "block" : "hidden"} id="link8">
+                  <span>
+                    <div className="md:col-span-1 pl-14">
+                      <div className=" sm:px-0">
+                        <h3 className="text-3xl font-semibold leading-10 text-blue-800">
+                          Cost Structure
+                        </h3>
+                        <p className="mt-1 text-sm text-blue-800">
+                          (input from user)
+                        </p>
+                      </div>
+                    </div>
+                    {coststructure_inputFields.map(
+                      (coststructure_inputField) => (
+                        <div
+                          key={coststructure_inputField.id}
+                          className="md:mt-0 md:col-span-2"
+                        >
+                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                            <div className="py-5 bg-white space-y-6 sm:p-6">
+                              <div className="w-full grid grid-cols-3 gap-6">
+                                <div className="col-span-6 sm:col-span-3">
+                                  <label
+                                    htmlFor="typeofrisk"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Type of Risk
+                                  </label>
+                                  <select
+                                    id="coststructure_typeofrisk"
+                                    name="coststructure_typeofrisk"
+                                    autoComplete="coststructure_typeofrisk"
+                                    placeholder="choose one"
+                                    onChange={(event) =>
+                                      coststructure_onChange(
+                                        coststructure_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={coststructure_inputField.typeofrisk}
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Strategy Risk</option>
+                                    <option>Operational Risk</option>
+                                    <option>Financial Risk</option>
+                                    <option>Compliance Risk</option>
+                                  </select>
+                                </div>
+                                <div className="col-span-3 sm:col-span-2">
+                                  <label
+                                    htmlFor="email"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Risk
+                                  </label>
+                                  <div className="mt-1 flex rounded-md shadow-sm">
+                                    <textarea
+                                      onChange={(event) =>
+                                        coststructure_onChange(
+                                          coststructure_inputField.id,
+                                          event
+                                        )
+                                      }
+                                      value={coststructure_inputField.risk}
+                                      type="text"
+                                      name="coststructure_risk"
+                                      id="coststructure_risk"
+                                      autoComplete="coststructure_risk"
+                                      required
+                                      className="focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                      placeholder=" identify a risk"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div>
+                                <label
+                                  htmlFor="password"
+                                  className="block pb-2 text-sm font-medium text-blue-800"
+                                >
+                                  Impacts
+                                </label>
+
+                                <div className="rounded-md shadow-sm pb-2">
+                                  <label
+                                    htmlFor="financial"
+                                    className="pt-4 pr-6 text-sm font-medium text-blue-600"
+                                  >
+                                    Financial
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="coststructure_financialrisk"
+                                    name="coststructure_financialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      coststructure_onChange(
+                                        coststructure_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      coststructure_inputField.financialrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Health and safety
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="coststructure_healthrisk"
+                                    name="coststructure_healthrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      coststructure_onChange(
+                                        coststructure_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={coststructure_inputField.healthrisk}
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Natural environment
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    id="coststructure_naturalrisk"
+                                    name="coststructure_naturalrisk"
+                                    type="range"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      coststructure_onChange(
+                                        coststructure_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={coststructure_inputField.naturalrisk}
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Social / Cultutal Heritage
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="coststructure_socialrisk"
+                                    name="coststructure_socialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      coststructure_onChange(
+                                        coststructure_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={coststructure_inputField.socialrisk}
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Government / Reputation
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="coststructure_governmentrisk"
+                                    name="coststructure_governmentrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      coststructure_onChange(
+                                        coststructure_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      coststructure_inputField.governmentrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Legal
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="coststructure_legalrisk"
+                                    name="coststructure_legalrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      coststructure_onChange(
+                                        coststructure_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={coststructure_inputField.legalrisk}
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="col-span-6 sm:col-span-3 lg:col-span-3">
+                                <label className="block text-sm font-medium text-blue-800">
+                                  Likelihood
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      coststructure_onChange(
+                                        coststructure_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={coststructure_inputField.likelihood}
+                                    id="coststructure_likelihood"
+                                    name="coststructure_likelihood"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Improbable</option>
+                                    <option>Remote</option>
+                                    <option>Occasional</option>
+                                    <option>Probable</option>
+                                    <option>Frequent</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div className="col-span-6 sm:col-span-3">
+                                <label
+                                  htmlFor="acceptance"
+                                  className="block text-sm font-medium text-blue-800"
+                                >
+                                  Level of Acceptance
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      coststructure_onChange(
+                                        coststructure_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={coststructure_inputField.acceptance}
+                                    id="coststructure_acceptance"
+                                    name="coststructure_acceptance"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Desirable</option>
+                                    <option>Acceptable</option>
+                                    <option>Undesirable</option>
+                                    <option>Unacceptable</option>
+                                    <option>Catastrophic</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <button
+                              disabled={coststructure_inputFields.length === 1}
+                              onClick={() =>
+                                coststructure_removeField(
+                                  coststructure_inputField.id
+                                )
+                              }
+                              className="items-self-center ml-96 relative"
+                            >
+                              <TrashIcon
+                                className="h-5 w-5 text-red-500 group-hover:text-red-400"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </div>
+                          <div className="flex justify-center">
+                            <button
+                              onClick={coststructure_addRisk}
+                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            >
+                              add more risk
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </span>
+                </div>
+                <div className={openTab === 9 ? "block" : "hidden"} id="link9">
+                  <span>
+                    <div className="md:col-span-1 pl-14">
+                      <div className=" sm:px-0">
+                        <h3 className="text-3xl font-semibold leading-10 text-blue-800">
+                          Revenue Streams
+                        </h3>
+                        <p className="mt-1 text-sm text-blue-800">
+                          (input from user)
+                        </p>
+                      </div>
+                    </div>
+                    {revenuestreams_inputFields.map(
+                      (revenuestreams_inputField) => (
+                        <div
+                          key={revenuestreams_inputField.id}
+                          className="md:mt-0 md:col-span-2"
+                        >
+                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                            <div className="py-5 bg-white space-y-6 sm:p-6">
+                              <div className="w-full grid grid-cols-3 gap-6">
+                                <div className="col-span-6 sm:col-span-3">
+                                  <label
+                                    htmlFor="typeofrisk"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Type of Risk
+                                  </label>
+                                  <select
+                                    id="revenuestreams_typeofrisk"
+                                    name="revenuestreams_typeofrisk"
+                                    autoComplete="revenuestreams_typeofrisk"
+                                    placeholder="choose one"
+                                    onChange={(event) =>
+                                      revenuestreams_onChange(
+                                        revenuestreams_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={revenuestreams_inputField.typeofrisk}
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Strategy Risk</option>
+                                    <option>Operational Risk</option>
+                                    <option>Financial Risk</option>
+                                    <option>Compliance Risk</option>
+                                  </select>
+                                </div>
+                                <div className="col-span-3 sm:col-span-2">
+                                  <label
+                                    htmlFor="email"
+                                    className="block text-sm font-medium text-blue-800"
+                                  >
+                                    Risk
+                                  </label>
+                                  <div className="mt-1 flex rounded-md shadow-sm">
+                                    <textarea
+                                      onChange={(event) =>
+                                        revenuestreams_onChange(
+                                          revenuestreams_inputField.id,
+                                          event
+                                        )
+                                      }
+                                      value={revenuestreams_inputField.risk}
+                                      type="text"
+                                      name="revenuestreams_risk"
+                                      id="revenuestreams_risk"
+                                      autoComplete="revenuestreams_risk"
+                                      required
+                                      className="focus:ring-blue-500 focus:border-blue-500 flex-1 block rounded-none rounded-r-md sm:text-sm border-gray-300"
+                                      placeholder=" identify a risk"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <div>
+                                <label
+                                  htmlFor="password"
+                                  className="block pb-2 text-sm font-medium text-blue-800"
+                                >
+                                  Impacts
+                                </label>
+
+                                <div className="rounded-md shadow-sm pb-2">
+                                  <label
+                                    htmlFor="financial"
+                                    className="pt-4 pr-6 text-sm font-medium text-blue-600"
+                                  >
+                                    Financial
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="revenuestreams_financialrisk"
+                                    name="revenuestreams_financialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      revenuestreams_onChange(
+                                        revenuestreams_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      revenuestreams_inputField.financialrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Health and safety
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="revenuestreams_healthrisk"
+                                    name="revenuestreams_healthrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      revenuestreams_onChange(
+                                        revenuestreams_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={revenuestreams_inputField.healthrisk}
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Natural environment
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    id="revenuestreams_naturalrisk"
+                                    name="revenuestreams_naturalrisk"
+                                    type="range"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      revenuestreams_onChange(
+                                        revenuestreams_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      revenuestreams_inputField.naturalrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Social / Cultutal Heritage
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="revenuestreams_socialrisk"
+                                    name="revenuestreams_socialrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      revenuestreams_onChange(
+                                        revenuestreams_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={revenuestreams_inputField.socialrisk}
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Government / Reputation
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="revenuestreams_governmentrisk"
+                                    name="revenuestreams_governmentrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      revenuestreams_onChange(
+                                        revenuestreams_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={
+                                      revenuestreams_inputField.governmentrisk
+                                    }
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                                <div className="pb-2 rounded-md shadow-sm ">
+                                  <label className="pt-4 pr-6 text-sm font-medium text-blue-600">
+                                    Legal
+                                  </label>
+
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Least Impact
+                                  </label>
+                                  <input
+                                    type="range"
+                                    id="revenuestreams_legalrisk"
+                                    name="revenuestreams_legalrisk"
+                                    min="1"
+                                    max="5"
+                                    step="1"
+                                    list="steplist"
+                                    className="mx-5 text-blue-400"
+                                    color="blue"
+                                    onChange={(event) =>
+                                      revenuestreams_onChange(
+                                        revenuestreams_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={revenuestreams_inputField.legalrisk}
+                                  />
+                                  <datalist
+                                    id="steplist"
+                                    className="text-blue-400"
+                                  >
+                                    <option label="1">1</option>
+                                    <option label="2">2</option>
+                                    <option label="3">3</option>
+                                    <option label="4">4</option>
+                                    <option label="5">5</option>
+                                  </datalist>
+                                  <label className="pt-4 text-xs font-medium text-gray-400">
+                                    Most Impact
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="col-span-6 sm:col-span-3 lg:col-span-3">
+                                <label className="block text-sm font-medium text-blue-800">
+                                  Likelihood
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      revenuestreams_onChange(
+                                        revenuestreams_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={revenuestreams_inputField.likelihood}
+                                    id="revenuestreams_likelihood"
+                                    name="revenuestreams_likelihood"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Improbable</option>
+                                    <option>Remote</option>
+                                    <option>Occasional</option>
+                                    <option>Probable</option>
+                                    <option>Frequent</option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <div className="col-span-6 sm:col-span-3">
+                                <label
+                                  htmlFor="acceptance"
+                                  className="block text-sm font-medium text-blue-800"
+                                >
+                                  Level of Acceptance
+                                </label>
+                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                  <select
+                                    onChange={(event) =>
+                                      revenuestreams_onChange(
+                                        revenuestreams_inputField.id,
+                                        event
+                                      )
+                                    }
+                                    value={revenuestreams_inputField.acceptance}
+                                    id="revenuestreams_acceptance"
+                                    name="revenuestreams_acceptance"
+                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                  >
+                                    <option>Desirable</option>
+                                    <option>Acceptable</option>
+                                    <option>Undesirable</option>
+                                    <option>Unacceptable</option>
+                                    <option>Catastrophic</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+
+                            <button
+                              disabled={revenuestreams_inputFields.length === 1}
+                              onClick={() =>
+                                revenuestreams_removeField(
+                                  revenuestreams_inputField.id
+                                )
+                              }
+                              className="items-self-center ml-96 relative"
+                            >
+                              <TrashIcon
+                                className="h-5 w-5 text-red-500 group-hover:text-red-400"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </div>
+                          <div className="flex justify-center">
+                            <button
+                              onClick={revenuestreams_addRisk}
+                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            >
+                              add more risk
+                            </button>
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </span>
                 </div>
               </div>
             </div>

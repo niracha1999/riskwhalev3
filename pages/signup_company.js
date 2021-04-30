@@ -423,7 +423,8 @@ const signup_company = () => {
                     List of Functional Areas
                   </h3>
                   <p className="mt-1 text-sm text-blue-800">
-                    Decide which communications you'd like to receive and how.
+                    List all functional areas in your company for further
+                    analysis
                   </p>
                 </div>
               </div>

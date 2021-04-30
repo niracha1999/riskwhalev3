@@ -1,6 +1,7 @@
 import { MainMenu } from "../components/MainMenu";
 
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 import axios from "axios";
 
@@ -12,13 +13,17 @@ const ScrollToPoint1 = () => {
 };
 
 const profile_individual = () => {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [firstname, setFirstname] = useState("");
   const [occupation, setOccupation] = useState("");
   const [institute, setInstitute] = useState("");
+
   useEffect(() => {
     fetchItems();
   }, []);
+
   const fetchItems = async () => {
     await axios
       .get("http://api-riskwhale.herokuapp.com/userinfo/" + localStorage.user)
@@ -35,6 +40,12 @@ const profile_individual = () => {
       });
   };
 
+  const logout = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    router.push("/signin");
+  };
+
   return (
     <div>
       <MainMenu />
@@ -42,7 +53,7 @@ const profile_individual = () => {
       <>
         <div className="pt-40 px-14">
           <h1 className="text-center text-lg text-5xl font-bold leading-6 text-blue-800">
-            Individual Registration
+            Individual Profile
           </h1>
         </div>
         <div className="pt-24 px-14">
@@ -163,6 +174,14 @@ const profile_individual = () => {
           <div className="py-5">
             <div className="border-t border-gray-200" />
           </div>
+        </div>
+        <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
+          <button
+            onClick={logout}
+            className="w-56 inline-flex justify-center my-24 px-4 p-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+          >
+            Sign Out
+          </button>
         </div>
       </>
     </div>

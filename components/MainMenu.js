@@ -12,10 +12,13 @@ function classNames(...classes) {
 export const MainMenu = () => {
   const router = useRouter();
   const isSigned = () => {
-    if (localStorage.token === "undefined") {
-      router.push("/signin");
+    console.log(localStorage.usertype);
+    if (localStorage.usertype == "company") {
+      router.push("/profile_company");
+    } else if (localStorage.usertype == "individual") {
+      router.push("/profile_individual");
     } else {
-      router.push("/profile");
+      router.push("signin");
     }
   };
   return (

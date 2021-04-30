@@ -21,6 +21,7 @@ const signin = () => {
 
         const usertype = response.data.type;
         const token = response.data.authtoken;
+        const user = response.data.id_company;
 
         if (
           response.data === "Password is wrong" ||
@@ -30,12 +31,14 @@ const signin = () => {
         } else {
           localStorage.setItem("usertype", usertype);
           localStorage.setItem("token", token);
+          localStorage.setItem("user", user)
+          console.log(localStorage.user);
           console.log(localStorage.usertype);
           console.log(localStorage.token);
           if (usertype === "company") {
             router.push("/functions_company");
           } else {
-            router.push("functions_individual");
+            router.push("/functions_individual");
           }
         }
       })
