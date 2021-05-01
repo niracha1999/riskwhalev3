@@ -1,6 +1,4 @@
 import { MainMenu } from "../components/MainMenu";
-import { Popover } from "@headlessui/react";
-import Head from "next/head";
 
 const RA_Home = () => {
   return (
@@ -8,7 +6,7 @@ const RA_Home = () => {
       <>
         <MainMenu />
       </>
-      <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-2">
+      <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 pt-36 px-4 sm:px-6 lg:px-2">
         <div className="max-w-md w-full">
           <div>
             <img

@@ -3,7 +3,6 @@ import { MainMenu } from "../components/MainMenu";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-
 import { useRouter } from "next/router";
 
 const ScrollToPoint1 = () => {
@@ -43,7 +42,11 @@ const profile_company = () => {
 
   const fetchItems = async () => {
     await axios
-      .get("http://api-riskwhale.herokuapp.com/userinfo/" + localStorage.user)
+      .get("http://api-riskwhale.herokuapp.com/userinfo/" + localStorage.user, {
+        headers: {
+          "auth-token": localStorage.token,
+        },
+      })
       .then((response) => {
         console.log(response.data.functionaldepartments);
 

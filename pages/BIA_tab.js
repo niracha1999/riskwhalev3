@@ -13,7 +13,12 @@ const BIA_tab = () => {
     const user = localStorage.user;
     console.log(user);
     const result = await axios.get(
-      "http://api-riskwhale.herokuapp.com/userinfo/" + user
+      "http://api-riskwhale.herokuapp.com/userinfo/" + user,
+      {
+        headers: {
+          "auth-token": localStorage.token,
+        },
+      }
     );
 
     console.log(result.data.functionaldepartments);

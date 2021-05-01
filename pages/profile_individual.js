@@ -26,7 +26,11 @@ const profile_individual = () => {
 
   const fetchItems = async () => {
     await axios
-      .get("http://api-riskwhale.herokuapp.com/userinfo/" + localStorage.user)
+      .get("http://api-riskwhale.herokuapp.com/userinfo/" + localStorage.user, {
+        headers: {
+          "auth-token": localStorage.token,
+        },
+      })
       .then((response) => {
         console.log(response);
 

@@ -1,5 +1,6 @@
-import React from "react";
 import { MainMenu } from "../components/MainMenu";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import { TrashIcon } from "@heroicons/react/solid";
 import { v4 as uuidv4 } from "uuid";
@@ -7,7 +8,54 @@ import { v4 as uuidv4 } from "uuid";
 const RA_tab = () => {
   const [openTab, setOpenTab] = React.useState(0);
 
+  useEffect(() => {
+    getUserDetails();
+  }, []);
 
+  const getUserDetails = async () => {
+    await axios
+      .get(
+        "http://api-riskwhale.herokuapp.com/userinfo/ind/" +
+          localStorage.user +
+          "?business=" +
+          localStorage.businesstype,
+        {
+          headers: {
+            "auth-token": localStorage.token,
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        console.log(localStorage.businesstype);
+
+        const usertype = response.data.type;
+        const token = response.data.authtoken;
+        const user = response.data.id_company;
+
+        if (
+          response.data === "Password is wrong" ||
+          response.data === "Please confirm the information"
+        ) {
+          console.log("Bugg from front");
+        } else {
+          localStorage.setItem("usertype", usertype);
+          localStorage.setItem("token", token);
+          localStorage.setItem("user", user);
+          console.log(localStorage.user);
+          console.log(localStorage.usertype);
+          console.log(localStorage.token);
+          if (usertype === "company") {
+            router.push("/functions_company");
+          } else {
+            router.push("/functions_individual");
+          }
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const [keypartners_inputFields, keypartners_setInputFields] = React.useState([
     {

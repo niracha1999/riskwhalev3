@@ -11,7 +11,12 @@ const mtpd_and_rto = () => {
 
   useEffect(async () => {
     const result = await axios(
-      "http://localhost:1000/userinfo/6085434bd772e64fc51e2646"
+      "http://localhost:1000/userinfo/6085434bd772e64fc51e2646",
+      {
+        headers: {
+          "auth-token": localStorage.token,
+        },
+      }
     );
 
     console.log(result.data.functionaldepartments);

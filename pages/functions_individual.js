@@ -1,7 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState  } from "react";
 import { MainMenu } from "../components/MainMenu";
 
+import { useRouter } from "next/router";
+
 const functions_individual = () => {
+  const router = useRouter();
+  const [businesstype, setBusinessType] = useState("");
+
+  const sendBusinessTypetoBIA = async () => {
+    localStorage.setItem("businesstype", businesstype);
+    router.push("/BIA_Home");
+  };
+
+  const sendBusinessTypetoRA = async () => {
+    localStorage.setItem("businesstype", businesstype);
+    router.push("/RA_Home");
+  };
+
   return (
     <div>
       <MainMenu />
@@ -20,16 +35,14 @@ const functions_individual = () => {
               </label>
 
               <select
-                id="likelihood"
-                name="likelihood"
+                value={businesstype}
+                onChange={(e) => setBusinessType(e.target.value)}
+                id="businesstype"
+                name="businesstype"
                 placeholder="choose one"
                 className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               >
-                <option>Pizza Restaurant</option>
-                <option>Remote</option>
-                <option>Occasional</option>
-                <option>Probable</option>
-                <option>Frequent</option>
+                <option value="pizza">Pizza Restaurant</option>
               </select>
             </div>
           </div>
@@ -48,7 +61,7 @@ const functions_individual = () => {
               or emergency.
             </dd>
             <a
-              href="/BIA_Home"
+              onClick={sendBusinessTypetoBIA}
               class="small flex items-center justify-center mx-24 mt-12 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
             >
               Get started
@@ -68,7 +81,7 @@ const functions_individual = () => {
               and summarized into a risk matrix.
             </dd>
             <a
-              href="/RA_Home"
+              onClick={sendBusinessTypetoRA}
               class="small flex items-center justify-center mx-24 mt-12 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10"
             >
               Get started
