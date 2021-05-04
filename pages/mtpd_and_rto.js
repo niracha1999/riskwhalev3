@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import { MainMenu } from "../components/MainMenu";
 import axios from "axios";
 
-import { TrashIcon } from "@heroicons/react/solid";
-import { v4 as uuidv4 } from "uuid";
-
 const mtpd_and_rto = () => {
   const [data, setData] = useState({ areas: [] });
   const [openTab, setOpenTab] = React.useState(0);
 
   useEffect(async () => {
     const result = await axios(
-      "http://localhost:1000/userinfo/6085434bd772e64fc51e2646",
+      "http://api-riskwhale.herokuapp.com/userinfo/ind/" + localStorage.user,
       {
         headers: {
           "auth-token": localStorage.token,
@@ -19,7 +16,6 @@ const mtpd_and_rto = () => {
       }
     );
 
-    console.log(result.data.functionaldepartments);
     setData({
       areas: result.data.functionaldepartments,
     });
@@ -113,7 +109,7 @@ const mtpd_and_rto = () => {
                                 </label>
 
                                 <input
-                                  id="likelihood"
+                                  id="objective"
                                   name="objective"
                                   type="text"
                                   required

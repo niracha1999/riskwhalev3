@@ -26,11 +26,14 @@ const profile_individual = () => {
 
   const fetchItems = async () => {
     await axios
-      .get("http://api-riskwhale.herokuapp.com/userinfo/" + localStorage.user, {
-        headers: {
-          "auth-token": localStorage.token,
-        },
-      })
+      .get(
+        "http://api-riskwhale.herokuapp.com/userinfo/ind/" + localStorage.user,
+        {
+          headers: {
+            "auth-token": localStorage.token,
+          },
+        }
+      )
       .then((response) => {
         console.log(response);
 
@@ -55,12 +58,12 @@ const profile_individual = () => {
       <MainMenu />
 
       <>
-        <div className="pt-40 px-14">
+        <div className="pt-36 px-14">
           <h1 className="text-center text-lg text-5xl font-bold leading-6 text-blue-800">
             Individual Profile
           </h1>
         </div>
-        <div className="pt-24 px-14">
+        <div className="pt-14 px-14">
           <div className="md:grid md:grid-cols-3 md:gap-6 ">
             <div className="md:col-span-1 px-14">
               <div className="px-4 sm:px-0">
@@ -90,14 +93,6 @@ const profile_individual = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                  <button
-                    onClick={ScrollToPoint1}
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                  >
-                    Next
-                  </button>
                 </div>
               </div>
             </div>
@@ -180,6 +175,12 @@ const profile_individual = () => {
           </div>
         </div>
         <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
+          <button
+            
+            className="w-56 inline-flex justify-center my-24 mr-12 p-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            Edit Profile
+          </button>
           <button
             onClick={logout}
             className="w-56 inline-flex justify-center my-24 px-4 p-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"

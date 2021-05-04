@@ -242,7 +242,7 @@ const signup_company = () => {
                     Company Information
                   </h3>
                   <p className="mt-1 text-sm text-blue-800">
-                    Fill-in company name and busienss model canvas for further
+                    Fill-in company name and business model canvas for further
                     use. The business model canvas will be saved with other
                     account information.
                   </p>
@@ -498,9 +498,7 @@ const signup_company = () => {
                     Information Confirmation
                   </h3>
                   <p className="mt-1 text-sm text-blue-800">
-                    Fill-in company name and busienss model canvas for further
-                    use. The business model canvas will be saved with other
-                    account information.
+                    Type full name to confirm that the provided information is true.
                   </p>
                 </div>
               </div>

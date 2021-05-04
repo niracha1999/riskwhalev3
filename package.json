@@ -10,6 +10,7 @@
   "dependencies": {
     "@headlessui/react": "^1.0.0",
     "@heroicons/react": "^1.0.1",
+    "@react-pdf/renderer": "^2.0.8",
     "axios": "^0.21.1",
     "heroicons": "^1.0.1",
     "heroicons-react": "^1.4.0",

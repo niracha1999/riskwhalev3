@@ -1,4 +1,4 @@
-import React, { useEffect, useState  } from "react";
+import React, { useEffect, useState } from "react";
 import { MainMenu } from "../components/MainMenu";
 
 import { useRouter } from "next/router";
@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 const functions_individual = () => {
   const router = useRouter();
   const [businesstype, setBusinessType] = useState("");
+  console.log(businesstype);
 
   const sendBusinessTypetoBIA = async () => {
     localStorage.setItem("businesstype", businesstype);
@@ -30,7 +31,10 @@ const functions_individual = () => {
               </span>
             </h2>
             <div class="relative flex items-center justify-center mt-8 flex mx-0 lg:mt-0 lg:flex-shrink-0">
-              <label class="text-lg leading-6 font-medium text-gray-900">
+              <label
+                for="businesstype"
+                class="text-lg leading-6 font-medium text-gray-900"
+              >
                 Choose a business you want to own
               </label>
 
@@ -39,9 +43,11 @@ const functions_individual = () => {
                 onChange={(e) => setBusinessType(e.target.value)}
                 id="businesstype"
                 name="businesstype"
-                placeholder="choose one"
+                required
                 className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               >
+                {" "}
+                <option value="">-- Please choose an option --</option>
                 <option value="pizza">Pizza Restaurant</option>
               </select>
             </div>

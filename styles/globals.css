@@ -19,5 +19,5 @@ input[type="range"] {
   width: 40%;
   height: 0.2em;
   background: "#A7C1DD";
-  
+  initial-value: "2";
 }

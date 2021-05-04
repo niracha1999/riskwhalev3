@@ -21,6 +21,15 @@ export const MainMenu = () => {
       router.push("signin");
     }
   };
+
+  const toFunctions = () => {
+    if (localStorage.usertype == "company") {
+      router.push("/functions_company");
+    } else {
+      router.push("/functions_individual");
+    }
+  };
+
   return (
     <Popover className=" bg-white fixed z-40 w-full">
       {({ open }) => (
@@ -69,7 +78,12 @@ export const MainMenu = () => {
                     </>
                   )}
                 </Popover>
-
+                <a
+                  onClick={toFunctions}
+                  className="text-base font-medium text-gray-500 hover:text-gray-900"
+                >
+                  Functions
+                </a>
                 <a
                   href="/BIA_Home"
                   className="text-base font-medium text-gray-500 hover:text-gray-900"

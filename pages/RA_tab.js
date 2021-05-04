@@ -7,18 +7,35 @@ import { v4 as uuidv4 } from "uuid";
 
 const RA_tab = () => {
   const [openTab, setOpenTab] = React.useState(0);
+  const [keypartners, setKeypartners] = useState("");
+  const [keyactivities, setKeyactivities] = useState("");
+  const [keyresources, setKeyresources] = useState("");
+  const [valueproposition, setValueproposition] = useState("");
+  const [customerrelationships, setCustomerrelationships] = useState("");
+  const [channels, setChannels] = useState("");
+  const [customersegments, setCustomersegments] = useState("");
+  const [coststructure, setCoststructure] = useState("");
+  const [revenuestream, setRevenuestream] = useState("");
 
   useEffect(() => {
-    getUserDetails();
+    if (localStorage.usertype == "company") {
+      console.log("company user identified");
+      getCompDetails();
+    } else if (localStorage.usertype == "individual") {
+      console.log("individual user identified");
+      getIndDetails();
+    } else {
+      console.log("invalid type of user");
+    }
   }, []);
-
-  const getUserDetails = async () => {
+  const getIndDetails = async () => {
     await axios
       .get(
         "http://api-riskwhale.herokuapp.com/userinfo/ind/" +
           localStorage.user +
           "?business=" +
           localStorage.businesstype,
+
         {
           headers: {
             "auth-token": localStorage.token,
@@ -28,29 +45,78 @@ const RA_tab = () => {
       .then((response) => {
         console.log(response);
         console.log(localStorage.businesstype);
+        console.log(response.data.businessmodel.keypartners);
 
-        const usertype = response.data.type;
-        const token = response.data.authtoken;
-        const user = response.data.id_company;
+        setKeypartners(response.data.businessmodel.keypartners);
+        setKeyactivities(response.data.businessmodel.keyactivities);
+        setKeyresources(response.data.businessmodel.keyresources);
+        setValueproposition(response.data.businessmodel.valueproposition);
+        setCustomerrelationships(
+          response.data.businessmodel.customerrelationships
+        );
+        setChannels(response.data.businessmodel.channels);
+        setCustomersegments(response.data.businessmodel.customersegments);
+        setCoststructure(response.data.businessmodel.coststructure);
+        setRevenuestream(response.data.businessmodel.revenuestream);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-        if (
-          response.data === "Password is wrong" ||
-          response.data === "Please confirm the information"
-        ) {
-          console.log("Bugg from front");
-        } else {
-          localStorage.setItem("usertype", usertype);
-          localStorage.setItem("token", token);
-          localStorage.setItem("user", user);
-          console.log(localStorage.user);
-          console.log(localStorage.usertype);
-          console.log(localStorage.token);
-          if (usertype === "company") {
-            router.push("/functions_company");
-          } else {
-            router.push("/functions_individual");
-          }
+  const getCompDetails = async () => {
+    await axios
+      .get(
+        "http://api-riskwhale.herokuapp.com/userinfo/company/" +
+          localStorage.user,
+        {
+          headers: {
+            "auth-token": localStorage.token,
+          },
         }
+      )
+      .then((response) => {
+        console.log(response);
+        console.log(response.data.businessmodel.keypartners);
+
+        setKeypartners(response.data.businessmodel.keypartners);
+        setKeyactivities(response.data.businessmodel.keyactivities);
+        setKeyresources(response.data.businessmodel.keyresources);
+        setValueproposition(response.data.businessmodel.valueproposition);
+        setCustomerrelationships(
+          response.data.businessmodel.customerrelationships
+        );
+        setChannels(response.data.businessmodel.channels);
+        setCustomersegments(response.data.businessmodel.customersegments);
+        setCoststructure(response.data.businessmodel.coststructure);
+        setRevenuestream(response.data.businessmodel.revenuestream);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const postDetails = async () => {
+    console.log(postKeyPartners);
+    console.log("posted");
+
+    await axios
+      .post(
+        "http://api-riskwhale.herokuapp.com/ra/" + localStorage.user,
+        {
+          id_company: localStorage.user,
+          box: [postKeyPartners],
+        },
+
+        {
+          headers: {
+            "auth-token": localStorage.token,
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -60,16 +126,16 @@ const RA_tab = () => {
   const [keypartners_inputFields, keypartners_setInputFields] = React.useState([
     {
       id: uuidv4(),
+      model: "keypartners",
       typeofrisk: "",
       risk: "",
-      financialrisk: "",
-      healthrisk: "",
-      naturalrisk: "",
-      socialrisk: "",
-      governmentrisk: "",
-      legalrisk: "",
+      financialrisk: "2",
+      healthrisk: "2",
+      naturalrisk: "2",
+      socialrisk: "2",
+      governmentrisk: "2",
+      legalrisk: "2",
       likelihood: "",
-      acceptance: "",
     },
   ]);
 
@@ -78,16 +144,16 @@ const RA_tab = () => {
       ...keypartners_inputFields,
       {
         id: uuidv4(),
+        model: "keypartners",
         typeofrisk: "",
         risk: "",
-        financialrisk: "",
-        healthrisk: "",
-        naturalrisk: "",
-        socialrisk: "",
-        governmentrisk: "",
-        legalrisk: "",
+        financialrisk: "2",
+        healthrisk: "2",
+        naturalrisk: "2",
+        socialrisk: "2",
+        governmentrisk: "2",
+        legalrisk: "2",
         likelihood: "",
-        acceptance: "",
       },
     ]);
   };
@@ -118,16 +184,16 @@ const RA_tab = () => {
   ] = React.useState([
     {
       id: uuidv4(),
+      model: "keyactivities",
       keyactivities_typeofrisk: "",
       keyactivities_risk: "",
-      keyactivities_financialrisk: "",
-      keyactivities_healthrisk: "",
-      keyactivities_naturalrisk: "",
-      keyactivities_socialrisk: "",
-      keyactivities_governmentrisk: "",
-      keyactivities_legalrisk: "",
+      keyactivities_financialrisk: "2",
+      keyactivities_healthrisk: "2",
+      keyactivities_naturalrisk: "2",
+      keyactivities_socialrisk: "2",
+      keyactivities_governmentrisk: "2",
+      keyactivities_legalrisk: "2",
       keyactivities_likelihood: "",
-      keyactivities_acceptance: "",
     },
   ]);
 
@@ -136,19 +202,46 @@ const RA_tab = () => {
       ...keyactivities_inputFields,
       {
         id: uuidv4(),
+        model: "keyactivities",
         keyactivities_typeofrisk: "",
         keyactivities_risk: "",
-        keyactivities_financialrisk: "",
-        keyactivities_healthrisk: "",
-        keyactivities_naturalrisk: "",
-        keyactivities_socialrisk: "",
-        keyactivities_governmentrisk: "",
-        keyactivities_legalrisk: "",
+        keyactivities_financialrisk: "2",
+        keyactivities_healthrisk: "2",
+        keyactivities_naturalrisk: "2",
+        keyactivities_socialrisk: "2",
+        keyactivities_governmentrisk: "2",
+        keyactivities_legalrisk: "2",
         keyactivities_likelihood: "",
-        keyactivities_acceptance: "",
       },
     ]);
   };
+
+  const postKeyPartners = keypartners_inputFields.map(
+    ({
+      typeofrisk: typeofrisks,
+      risk: risk,
+      financialrisk: financial,
+      healthrisk: healthandsafety,
+      naturalrisk: naturalenv,
+      socialrisk: socialheritage,
+      governmentrisk: government,
+      legalrisk: legal,
+      likelihood: likelihood,
+    }) => ({
+      model: "keypartners",
+      typeofrisks,
+      risk,
+      impacts: {
+        financial,
+        healthandsafety,
+        naturalenv,
+        socialheritage,
+        government,
+        legal,
+      },
+      likelihood,
+    }),
+  );
 
   const keyactivities_onChange = (id, event) => {
     const keyactivities_newInputFields = keyactivities_inputFields.map((i) => {
@@ -176,16 +269,16 @@ const RA_tab = () => {
   ] = React.useState([
     {
       id: uuidv4(),
+      model: "keyresources",
       keyresources_typeofrisk: "",
       keyresources_risk: "",
-      keyresources_financialrisk: "",
-      keyresources_healthrisk: "",
-      keyresources_naturalrisk: "",
-      keyresources_socialrisk: "",
-      keyresources_governmentrisk: "",
-      keyresources_legalrisk: "",
+      keyresources_financialrisk: "2",
+      keyresources_healthrisk: "2",
+      keyresources_naturalrisk: "2",
+      keyresources_socialrisk: "2",
+      keyresources_governmentrisk: "2",
+      keyresources_legalrisk: "2",
       keyresources_likelihood: "",
-      keyresources_acceptance: "",
     },
   ]);
 
@@ -194,16 +287,16 @@ const RA_tab = () => {
       ...keyresources_inputFields,
       {
         id: uuidv4(),
+        model: "keyresources",
         keyresources_typeofrisk: "",
         keyresources_risk: "",
-        keyresources_financialrisk: "",
-        keyresources_healthrisk: "",
-        keyresources_naturalrisk: "",
-        keyresources_socialrisk: "",
-        keyresources_governmentrisk: "",
-        keyresources_legalrisk: "",
+        keyresources_financialrisk: "2",
+        keyresources_healthrisk: "2",
+        keyresources_naturalrisk: "2",
+        keyresources_socialrisk: "2",
+        keyresources_governmentrisk: "2",
+        keyresources_legalrisk: "2",
         keyresources_likelihood: "",
-        keyresources_acceptance: "",
       },
     ]);
   };
@@ -234,16 +327,16 @@ const RA_tab = () => {
   ] = React.useState([
     {
       id: uuidv4(),
+      model: "valueproposition",
       valueproposition_typeofrisk: "",
       valueproposition_risk: "",
-      valueproposition_financialrisk: "",
-      valueproposition_healthrisk: "",
-      valueproposition_naturalrisk: "",
-      valueproposition_socialrisk: "",
-      valueproposition_governmentrisk: "",
-      valueproposition_legalrisk: "",
+      valueproposition_financialrisk: "2",
+      valueproposition_healthrisk: "2",
+      valueproposition_naturalrisk: "2",
+      valueproposition_socialrisk: "2",
+      valueproposition_governmentrisk: "2",
+      valueproposition_legalrisk: "2",
       valueproposition_likelihood: "",
-      valueproposition_acceptance: "",
     },
   ]);
 
@@ -252,16 +345,16 @@ const RA_tab = () => {
       ...valueproposition_inputFields,
       {
         id: uuidv4(),
+        model: "valueproposition",
         valueproposition_typeofrisk: "",
         valueproposition_risk: "",
-        valueproposition_financialrisk: "",
-        valueproposition_healthrisk: "",
-        valueproposition_naturalrisk: "",
-        valueproposition_socialrisk: "",
-        valueproposition_governmentrisk: "",
-        valueproposition_legalrisk: "",
+        valueproposition_financialrisk: "2",
+        valueproposition_healthrisk: "2",
+        valueproposition_naturalrisk: "2",
+        valueproposition_socialrisk: "2",
+        valueproposition_governmentrisk: "2",
+        valueproposition_legalrisk: "2",
         valueproposition_likelihood: "",
-        valueproposition_acceptance: "",
       },
     ]);
   };
@@ -294,16 +387,16 @@ const RA_tab = () => {
   ] = React.useState([
     {
       id: uuidv4(),
+      model: "customerrelationships",
       customerrelationships_typeofrisk: "",
       customerrelationships_risk: "",
-      customerrelationships_financialrisk: "",
-      customerrelationships_healthrisk: "",
-      customerrelationships_naturalrisk: "",
-      customerrelationships_socialrisk: "",
-      customerrelationships_governmentrisk: "",
-      customerrelationships_legalrisk: "",
+      customerrelationships_financialrisk: "2",
+      customerrelationships_healthrisk: "2",
+      customerrelationships_naturalrisk: "2",
+      customerrelationships_socialrisk: "2",
+      customerrelationships_governmentrisk: "2",
+      customerrelationships_legalrisk: "2",
       customerrelationships_likelihood: "",
-      customerrelationships_acceptance: "",
     },
   ]);
 
@@ -312,16 +405,16 @@ const RA_tab = () => {
       ...customerrelationships_inputFields,
       {
         id: uuidv4(),
+        model: "customerrelationships",
         customerrelationships_typeofrisk: "",
         customerrelationships_risk: "",
-        customerrelationships_financialrisk: "",
-        customerrelationships_healthrisk: "",
-        customerrelationships_naturalrisk: "",
-        customerrelationships_socialrisk: "",
-        customerrelationships_governmentrisk: "",
-        customerrelationships_legalrisk: "",
+        customerrelationships_financialrisk: "2",
+        customerrelationships_healthrisk: "2",
+        customerrelationships_naturalrisk: "2",
+        customerrelationships_socialrisk: "2",
+        customerrelationships_governmentrisk: "2",
+        customerrelationships_legalrisk: "2",
         customerrelationships_likelihood: "",
-        customerrelationships_acceptance: "",
       },
     ]);
   };
@@ -351,16 +444,16 @@ const RA_tab = () => {
   const [channels_inputFields, channels_setInputFields] = React.useState([
     {
       id: uuidv4(),
+      model: "channels",
       channels_typeofrisk: "",
       channels_risk: "",
-      channels_financialrisk: "",
-      channels_healthrisk: "",
-      channels_naturalrisk: "",
-      channels_socialrisk: "",
-      channels_governmentrisk: "",
-      channels_legalrisk: "",
+      channels_financialrisk: "2",
+      channels_healthrisk: "2",
+      channels_naturalrisk: "2",
+      channels_socialrisk: "2",
+      channels_governmentrisk: "2",
+      channels_legalrisk: "2",
       channels_likelihood: "",
-      channels_acceptance: "",
     },
   ]);
 
@@ -369,16 +462,16 @@ const RA_tab = () => {
       ...channels_inputFields,
       {
         id: uuidv4(),
+        model: "channels",
         channels_typeofrisk: "",
         channels_risk: "",
-        channels_financialrisk: "",
-        channels_healthrisk: "",
-        channels_naturalrisk: "",
-        channels_socialrisk: "",
-        channels_governmentrisk: "",
-        channels_legalrisk: "",
+        channels_financialrisk: "2",
+        channels_healthrisk: "2",
+        channels_naturalrisk: "2",
+        channels_socialrisk: "2",
+        channels_governmentrisk: "2",
+        channels_legalrisk: "2",
         channels_likelihood: "",
-        channels_acceptance: "",
       },
     ]);
   };
@@ -409,16 +502,16 @@ const RA_tab = () => {
   ] = React.useState([
     {
       id: uuidv4(),
+      model: "customersegments",
       customersegments_typeofrisk: "",
       customersegments_risk: "",
-      customersegments_financialrisk: "",
-      customersegments_healthrisk: "",
-      customersegments_naturalrisk: "",
-      customersegments_socialrisk: "",
-      customersegments_governmentrisk: "",
-      customersegments_legalrisk: "",
+      customersegments_financialrisk: "2",
+      customersegments_healthrisk: "2",
+      customersegments_naturalrisk: "2",
+      customersegments_socialrisk: "2",
+      customersegments_governmentrisk: "2",
+      customersegments_legalrisk: "2",
       customersegments_likelihood: "",
-      customersegments_acceptance: "",
     },
   ]);
 
@@ -427,16 +520,16 @@ const RA_tab = () => {
       ...customersegments_inputFields,
       {
         id: uuidv4(),
+        model: "customersegments",
         customersegments_typeofrisk: "",
         customersegments_risk: "",
-        customersegments_financialrisk: "",
-        customersegments_healthrisk: "",
-        customersegments_naturalrisk: "",
-        customersegments_socialrisk: "",
-        customersegments_governmentrisk: "",
-        customersegments_legalrisk: "",
+        customersegments_financialrisk: "2",
+        customersegments_healthrisk: "2",
+        customersegments_naturalrisk: "2",
+        customersegments_socialrisk: "2",
+        customersegments_governmentrisk: "2",
+        customersegments_legalrisk: "2",
         customersegments_likelihood: "",
-        customersegments_acceptance: "",
       },
     ]);
   };
@@ -469,16 +562,16 @@ const RA_tab = () => {
   ] = React.useState([
     {
       id: uuidv4(),
+      model: "coststructure",
       coststructure_typeofrisk: "",
       coststructure_risk: "",
-      coststructure_financialrisk: "",
-      coststructure_healthrisk: "",
-      coststructure_naturalrisk: "",
-      coststructure_socialrisk: "",
-      coststructure_governmentrisk: "",
-      coststructure_legalrisk: "",
+      coststructure_financialrisk: "2",
+      coststructure_healthrisk: "2",
+      coststructure_naturalrisk: "2",
+      coststructure_socialrisk: "2",
+      coststructure_governmentrisk: "2",
+      coststructure_legalrisk: "2",
       coststructure_likelihood: "",
-      coststructure_acceptance: "",
     },
   ]);
 
@@ -487,16 +580,16 @@ const RA_tab = () => {
       ...coststructure_inputFields,
       {
         id: uuidv4(),
+        model: "coststructure",
         coststructure_typeofrisk: "",
         coststructure_risk: "",
-        coststructure_financialrisk: "",
-        coststructure_healthrisk: "",
-        coststructure_naturalrisk: "",
-        coststructure_socialrisk: "",
-        coststructure_governmentrisk: "",
-        coststructure_legalrisk: "",
+        coststructure_financialrisk: "2",
+        coststructure_healthrisk: "2",
+        coststructure_naturalrisk: "2",
+        coststructure_socialrisk: "2",
+        coststructure_governmentrisk: "2",
+        coststructure_legalrisk: "2",
         coststructure_likelihood: "",
-        coststructure_acceptance: "",
       },
     ]);
   };
@@ -527,16 +620,16 @@ const RA_tab = () => {
   ] = React.useState([
     {
       id: uuidv4(),
+      model: "revenuestreams",
       revenuestreams_typeofrisk: "",
       revenuestreams_risk: "",
-      revenuestreams_financialrisk: "",
-      revenuestreams_healthrisk: "",
-      revenuestreams_naturalrisk: "",
-      revenuestreams_socialrisk: "",
-      revenuestreams_governmentrisk: "",
-      revenuestreams_legalrisk: "",
+      revenuestreams_financialrisk: "2",
+      revenuestreams_healthrisk: "2",
+      revenuestreams_naturalrisk: "2",
+      revenuestreams_socialrisk: "2",
+      revenuestreams_governmentrisk: "2",
+      revenuestreams_legalrisk: "2",
       revenuestreams_likelihood: "",
-      revenuestreams_acceptance: "",
     },
   ]);
 
@@ -545,16 +638,16 @@ const RA_tab = () => {
       ...revenuestreams_inputFields,
       {
         id: uuidv4(),
+        model: "revenuestreams",
         revenuestreams_typeofrisk: "",
         revenuestreams_risk: "",
-        revenuestreams_financialrisk: "",
-        revenuestreams_healthrisk: "",
-        revenuestreams_naturalrisk: "",
-        revenuestreams_socialrisk: "",
-        revenuestreams_governmentrisk: "",
-        revenuestreams_legalrisk: "",
+        revenuestreams_financialrisk: "2",
+        revenuestreams_healthrisk: "2",
+        revenuestreams_naturalrisk: "2",
+        revenuestreams_socialrisk: "2",
+        revenuestreams_governmentrisk: "2",
+        revenuestreams_legalrisk: "2",
         revenuestreams_likelihood: "",
-        revenuestreams_acceptance: "",
       },
     ]);
   };
@@ -703,7 +796,7 @@ const RA_tab = () => {
                       setOpenTab(8);
                     }}
                     data-toggle="tab"
-                    href="#link3"
+                    href="#link8"
                   >
                     <span class="ml-2">Cost Structure</span>
                   </a>
@@ -718,11 +811,19 @@ const RA_tab = () => {
                       setOpenTab(9);
                     }}
                     data-toggle="tab"
-                    href="#link3"
+                    href="#link9"
                   >
                     <span class="ml-2">Revenue Streams</span>
                   </a>
                 </li>
+                <div className="relative justify-center ml-16">
+                  <button
+                    onClick={postDetails}
+                    className="justify-self-center mt-4 text-sm py-2 px-8 border border-white shadow-sm text-sm font-medium rounded-md text-white bg-white-600 hover:bg-white-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-white-500"
+                  >
+                    Submit
+                  </button>
+                </div>
               </div>
             </nav>
 
@@ -735,8 +836,8 @@ const RA_tab = () => {
                         <h3 className="text-3xl font-semibold leading-10 text-blue-800">
                           Key Partners
                         </h3>
-                        <p className="mt-1 text-sm text-blue-800">
-                          (input from user)
+                        <p className="mt-1 mr-64 text-sm text-blue-800">
+                          {keypartners}
                         </p>
                       </div>
                     </div>
@@ -745,7 +846,7 @@ const RA_tab = () => {
                         key={keypartners_inputField.id}
                         className="md:mt-0 md:col-span-2"
                       >
-                        <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                        <div className="my-14 max-w-screen-md w-full ml-36 shadow sm:rounded-md sm:overflow-hidden">
                           <div className="py-5 bg-white space-y-6 sm:p-6">
                             <div className="w-full grid grid-cols-3 gap-6">
                               <div className="col-span-6 sm:col-span-3">
@@ -766,10 +867,21 @@ const RA_tab = () => {
                                   value={keypartners_inputField.typeofrisk}
                                   className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 >
-                                  <option>Strategy Risk</option>
-                                  <option>Operational Risk</option>
-                                  <option>Financial Risk</option>
-                                  <option>Compliance Risk</option>
+                                  <option value="">
+                                    -- Please choose an option --
+                                  </option>
+                                  <option value="strategyrisk">
+                                    Strategy Risk
+                                  </option>
+                                  <option value="operationalrisk">
+                                    Operational Risk
+                                  </option>
+                                  <option value="financialrisk">
+                                    Financial Risk
+                                  </option>
+                                  <option value="compliancerisk">
+                                    Compliance Risk
+                                  </option>
                                 </select>
                               </div>
                               <div className="col-span-3 sm:col-span-2">
@@ -822,11 +934,12 @@ const RA_tab = () => {
                                   id="financialrisk"
                                   name="financialrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
                                   color="blue"
+                                  value="1"
                                   onChange={(event) =>
                                     onChange(keypartners_inputField.id, event)
                                   }
@@ -839,8 +952,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -863,7 +974,7 @@ const RA_tab = () => {
                                   id="healthrisk"
                                   name="healthrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -880,8 +991,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -904,7 +1013,7 @@ const RA_tab = () => {
                                   name="naturalrisk"
                                   type="range"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -921,8 +1030,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -945,7 +1052,7 @@ const RA_tab = () => {
                                   id="socialrisk"
                                   name="socialrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -962,8 +1069,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -986,7 +1091,7 @@ const RA_tab = () => {
                                   id="governmentrisk"
                                   name="governmentrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -1003,8 +1108,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -1027,7 +1130,7 @@ const RA_tab = () => {
                                   id="legalrisk"
                                   name="legalrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -1044,8 +1147,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -1059,7 +1160,7 @@ const RA_tab = () => {
                               >
                                 Likelihood
                               </label>
-                              <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                              <div className="h-6 w-6/12 mt-1 flex rounded-md shadow-sm ">
                                 <select
                                   onChange={(event) =>
                                     onChange(keypartners_inputField.id, event)
@@ -1069,37 +1170,12 @@ const RA_tab = () => {
                                   name="likelihood"
                                   className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 >
-                                  <option>Improbable</option>
-                                  <option>Remote</option>
-                                  <option>Occasional</option>
-                                  <option>Probable</option>
-                                  <option>Frequent</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div className="col-span-6 sm:col-span-3">
-                              <label
-                                htmlFor="typeofrisk"
-                                className="block text-sm font-medium text-blue-800"
-                              >
-                                Level of Acceptance
-                              </label>
-                              <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
-                                <select
-                                  onChange={(event) =>
-                                    onChange(keypartners_inputField.id, event)
-                                  }
-                                  value={keypartners_inputField.acceptance}
-                                  id="acceptance"
-                                  name="acceptance"
-                                  className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                >
-                                  <option>Desirable</option>
-                                  <option>Acceptable</option>
-                                  <option>Undesirable</option>
-                                  <option>Unacceptable</option>
-                                  <option>Catastrophic</option>
+                                  <option value="">
+                                    -- Please choose an option --
+                                  </option>
+                                  <option value="1">Unlikely to occur</option>
+                                  <option value="2">Possible to occur</option>
+                                  <option value="3">Likely to occur</option>
                                 </select>
                               </div>
                             </div>
@@ -1110,7 +1186,7 @@ const RA_tab = () => {
                             onClick={() =>
                               removeField(keypartners_inputField.id)
                             }
-                            className="relative ml-96"
+                            className="relative ml-80"
                           >
                             <TrashIcon
                               className="h-5 w-5 text-red-500 group-hover:text-red-400"
@@ -1118,10 +1194,10 @@ const RA_tab = () => {
                             />
                           </button>
                         </div>
-                        <div className="flex justify-center">
+                        <div className="relative justify-center ml-96">
                           <button
                             onClick={addRisk}
-                            className="justify-self-center mt-2 ml-56 text-sm inline-flex py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            className="justify-self-center mt-2 text-sm py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                           >
                             add more risk
                           </button>
@@ -1137,8 +1213,8 @@ const RA_tab = () => {
                         <h3 className="text-3xl font-semibold leading-10 text-blue-800">
                           Key Activities
                         </h3>
-                        <p className="mt-1 text-sm text-blue-800">
-                          (input from user)
+                        <p className="mt-1 mr-64 text-sm text-blue-800">
+                          {keyactivities}
                         </p>
                       </div>
                     </div>
@@ -1148,7 +1224,7 @@ const RA_tab = () => {
                           key={keyactivities_inputField.id}
                           className="md:mt-0 md:col-span-2"
                         >
-                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                          <div className="my-14 max-w-screen-md w-full ml-36 shadow sm:rounded-md sm:overflow-hidden">
                             <div className="py-5 bg-white space-y-6 sm:p-6">
                               <div className="w-full grid grid-cols-3 gap-6">
                                 <div className="col-span-6 sm:col-span-3">
@@ -1172,10 +1248,21 @@ const RA_tab = () => {
                                     value={keyactivities_inputField.typeofrisk}
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Strategy Risk</option>
-                                    <option>Operational Risk</option>
-                                    <option>Financial Risk</option>
-                                    <option>Compliance Risk</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="strategyrisk">
+                                      Strategy Risk
+                                    </option>
+                                    <option value="operationalrisk">
+                                      Operational Risk
+                                    </option>
+                                    <option value="financialrisk">
+                                      Financial Risk
+                                    </option>
+                                    <option value="compliancerisk">
+                                      Compliance Risk
+                                    </option>
                                   </select>
                                 </div>
                                 <div className="col-span-3 sm:col-span-2">
@@ -1230,7 +1317,7 @@ const RA_tab = () => {
                                     id="keyactivities_financialrisk"
                                     name="keyactivities_financialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -1252,8 +1339,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -1272,7 +1357,7 @@ const RA_tab = () => {
                                     id="keyactivities_healthrisk"
                                     name="keyactivities_healthrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -1292,8 +1377,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -1312,7 +1395,7 @@ const RA_tab = () => {
                                     name="keyactivities_naturalrisk"
                                     type="range"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -1332,8 +1415,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -1352,7 +1433,7 @@ const RA_tab = () => {
                                     id="keyactivities_socialrisk"
                                     name="keyactivities_socialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -1372,8 +1453,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -1392,7 +1471,7 @@ const RA_tab = () => {
                                     id="keyactivities_governmentrisk"
                                     name="keyactivities_governmentrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -1414,8 +1493,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -1434,7 +1511,7 @@ const RA_tab = () => {
                                     id="keyactivities_legalrisk"
                                     name="keyactivities_legalrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -1454,8 +1531,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -1466,7 +1541,7 @@ const RA_tab = () => {
                                 <label className="block text-sm font-medium text-blue-800">
                                   Likelihood
                                 </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                <div className="h-6 w-6/12 mt-1 flex rounded-md shadow-sm ">
                                   <select
                                     onChange={(event) =>
                                       keyactivities_onChange(
@@ -1479,40 +1554,12 @@ const RA_tab = () => {
                                     name="keyactivities_likelihood"
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Improbable</option>
-                                    <option>Remote</option>
-                                    <option>Occasional</option>
-                                    <option>Probable</option>
-                                    <option>Frequent</option>
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div className="col-span-6 sm:col-span-3">
-                                <label
-                                  htmlFor="acceptance"
-                                  className="block text-sm font-medium text-blue-800"
-                                >
-                                  Level of Acceptance
-                                </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
-                                  <select
-                                    onChange={(event) =>
-                                      keyactivities_onChange(
-                                        keyactivities_inputField.id,
-                                        event
-                                      )
-                                    }
-                                    value={keyactivities_inputField.acceptance}
-                                    id="keyactivities_acceptance"
-                                    name="keyactivities_acceptance"
-                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                  >
-                                    <option>Desirable</option>
-                                    <option>Acceptable</option>
-                                    <option>Undesirable</option>
-                                    <option>Unacceptable</option>
-                                    <option>Catastrophic</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="1">Unlikely to occur</option>
+                                    <option value="2">Possible to occur</option>
+                                    <option value="3">Likely to occur</option>
                                   </select>
                                 </div>
                               </div>
@@ -1525,7 +1572,7 @@ const RA_tab = () => {
                                   keyactivities_inputField.id
                                 )
                               }
-                              className="items-self-center ml-96 relative"
+                              className="items-self-center ml-80 relative"
                             >
                               <TrashIcon
                                 className="h-5 w-5 text-red-500 group-hover:text-red-400"
@@ -1533,10 +1580,10 @@ const RA_tab = () => {
                               />
                             </button>
                           </div>
-                          <div className="flex justify-center">
+                          <div className="relative justify-center ml-96">
                             <button
                               onClick={keyactivities_addRisk}
-                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                              className="justify-self-center mt-2 text-sm py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                             >
                               add more risk
                             </button>
@@ -1553,8 +1600,8 @@ const RA_tab = () => {
                         <h3 className="text-3xl font-semibold leading-10 text-blue-800">
                           Key Resources
                         </h3>
-                        <p className="mt-1 text-sm text-blue-800">
-                          (input from user)
+                        <p className="mt-1 mr-64 text-sm text-blue-800">
+                          {keyresources}
                         </p>
                       </div>
                     </div>
@@ -1563,7 +1610,7 @@ const RA_tab = () => {
                         key={keyresources_inputField.id}
                         className="md:mt-0 md:col-span-2"
                       >
-                        <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                        <div className="my-14 max-w-screen-md w-full ml-36 shadow sm:rounded-md sm:overflow-hidden">
                           <div className="py-5 bg-white space-y-6 sm:p-6">
                             <div className="w-full grid grid-cols-3 gap-6">
                               <div className="col-span-6 sm:col-span-3">
@@ -1587,10 +1634,21 @@ const RA_tab = () => {
                                   value={keyresources_inputField.typeofrisk}
                                   className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 >
-                                  <option>Strategy Risk</option>
-                                  <option>Operational Risk</option>
-                                  <option>Financial Risk</option>
-                                  <option>Compliance Risk</option>
+                                  <option value="">
+                                    -- Please choose an option --
+                                  </option>
+                                  <option value="strategyrisk">
+                                    Strategy Risk
+                                  </option>
+                                  <option value="operationalrisk">
+                                    Operational Risk
+                                  </option>
+                                  <option value="financialrisk">
+                                    Financial Risk
+                                  </option>
+                                  <option value="compliancerisk">
+                                    Compliance Risk
+                                  </option>
                                 </select>
                               </div>
                               <div className="col-span-3 sm:col-span-2">
@@ -1645,7 +1703,7 @@ const RA_tab = () => {
                                   id="keyresources_financialrisk"
                                   name="keyresources_financialrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -1665,8 +1723,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -1685,7 +1741,7 @@ const RA_tab = () => {
                                   id="keyresources_healthrisk"
                                   name="keyresources_healthrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -1705,8 +1761,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -1725,7 +1779,7 @@ const RA_tab = () => {
                                   name="keyresources_naturalrisk"
                                   type="range"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -1745,8 +1799,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -1765,7 +1817,7 @@ const RA_tab = () => {
                                   id="keyresources_socialrisk"
                                   name="keyresources_socialrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -1785,8 +1837,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -1805,7 +1855,7 @@ const RA_tab = () => {
                                   id="keyresources_governmentrisk"
                                   name="keyresources_governmentrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -1825,8 +1875,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -1845,7 +1893,7 @@ const RA_tab = () => {
                                   id="keyresources_legalrisk"
                                   name="keyresources_legalrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -1865,8 +1913,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -1877,7 +1923,7 @@ const RA_tab = () => {
                               <label className="block text-sm font-medium text-blue-800">
                                 Likelihood
                               </label>
-                              <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                              <div className="h-6 w-6/12 mt-1 flex rounded-md shadow-sm ">
                                 <select
                                   onChange={(event) =>
                                     keyresources_onChange(
@@ -1890,40 +1936,12 @@ const RA_tab = () => {
                                   name="keyresources_likelihood"
                                   className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 >
-                                  <option>Improbable</option>
-                                  <option>Remote</option>
-                                  <option>Occasional</option>
-                                  <option>Probable</option>
-                                  <option>Frequent</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div className="col-span-6 sm:col-span-3">
-                              <label
-                                htmlFor="acceptance"
-                                className="block text-sm font-medium text-blue-800"
-                              >
-                                Level of Acceptance
-                              </label>
-                              <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
-                                <select
-                                  onChange={(event) =>
-                                    keyresources_onChange(
-                                      keyresources_inputField.id,
-                                      event
-                                    )
-                                  }
-                                  value={keyresources_inputField.acceptance}
-                                  id="keyresources_acceptance"
-                                  name="keyresources_acceptance"
-                                  className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                >
-                                  <option>Desirable</option>
-                                  <option>Acceptable</option>
-                                  <option>Undesirable</option>
-                                  <option>Unacceptable</option>
-                                  <option>Catastrophic</option>
+                                  <option value="">
+                                    -- Please choose an option --
+                                  </option>
+                                  <option value="1">Unlikely to occur</option>
+                                  <option value="2">Possible to occur</option>
+                                  <option value="3">Likely to occur</option>
                                 </select>
                               </div>
                             </div>
@@ -1936,7 +1954,7 @@ const RA_tab = () => {
                                 keyresources_inputField.id
                               )
                             }
-                            className="items-self-center ml-96 relative"
+                            className="items-self-center ml-80 relative"
                           >
                             <TrashIcon
                               className="h-5 w-5 text-red-500 group-hover:text-red-400"
@@ -1944,10 +1962,10 @@ const RA_tab = () => {
                             />
                           </button>
                         </div>
-                        <div className="flex justify-center">
+                        <div className="frelative justify-center ml-96">
                           <button
                             onClick={keyresources_addRisk}
-                            className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            className="justify-self-center mt-2 text-sm py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                           >
                             add more risk
                           </button>
@@ -1963,8 +1981,8 @@ const RA_tab = () => {
                         <h3 className="text-3xl font-semibold leading-10 text-blue-800">
                           Value Propositions
                         </h3>
-                        <p className="mt-1 text-sm text-blue-800">
-                          (input from user)
+                        <p className="mt-1 mr-64 text-sm text-blue-800">
+                          {valueproposition}
                         </p>
                       </div>
                     </div>
@@ -1974,7 +1992,7 @@ const RA_tab = () => {
                           key={valueproposition_inputField.id}
                           className="md:mt-0 md:col-span-2"
                         >
-                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                          <div className="my-14 max-w-screen-md w-full ml-36 shadow sm:rounded-md sm:overflow-hidden">
                             <div className="py-5 bg-white space-y-6 sm:p-6">
                               <div className="w-full grid grid-cols-3 gap-6">
                                 <div className="col-span-6 sm:col-span-3">
@@ -2000,10 +2018,21 @@ const RA_tab = () => {
                                     }
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Strategy Risk</option>
-                                    <option>Operational Risk</option>
-                                    <option>Financial Risk</option>
-                                    <option>Compliance Risk</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="strategyrisk">
+                                      Strategy Risk
+                                    </option>
+                                    <option value="operationalrisk">
+                                      Operational Risk
+                                    </option>
+                                    <option value="financialrisk">
+                                      Financial Risk
+                                    </option>
+                                    <option value="compliancerisk">
+                                      Compliance Risk
+                                    </option>
                                   </select>
                                 </div>
                                 <div className="col-span-3 sm:col-span-2">
@@ -2058,7 +2087,7 @@ const RA_tab = () => {
                                     id="valueproposition_financialrisk"
                                     name="valueproposition_financialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2080,8 +2109,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2100,7 +2127,7 @@ const RA_tab = () => {
                                     id="valueproposition_healthrisk"
                                     name="valueproposition_healthrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2122,8 +2149,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2142,7 +2167,7 @@ const RA_tab = () => {
                                     name="valueproposition_naturalrisk"
                                     type="range"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2164,8 +2189,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2184,7 +2207,7 @@ const RA_tab = () => {
                                     id="valueproposition_socialrisk"
                                     name="valueproposition_socialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2206,8 +2229,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2226,7 +2247,7 @@ const RA_tab = () => {
                                     id="valueproposition_governmentrisk"
                                     name="valueproposition_governmentrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2248,8 +2269,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2268,7 +2287,7 @@ const RA_tab = () => {
                                     id="valueproposition_legalrisk"
                                     name="valueproposition_legalrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2290,8 +2309,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2302,7 +2319,7 @@ const RA_tab = () => {
                                 <label className="block text-sm font-medium text-blue-800">
                                   Likelihood
                                 </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                <div className="h-6 w-6/12 mt-1 flex rounded-md shadow-sm ">
                                   <select
                                     onChange={(event) =>
                                       valueproposition_onChange(
@@ -2317,42 +2334,12 @@ const RA_tab = () => {
                                     name="valueproposition_likelihood"
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Improbable</option>
-                                    <option>Remote</option>
-                                    <option>Occasional</option>
-                                    <option>Probable</option>
-                                    <option>Frequent</option>
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div className="col-span-6 sm:col-span-3">
-                                <label
-                                  htmlFor="acceptance"
-                                  className="block text-sm font-medium text-blue-800"
-                                >
-                                  Level of Acceptance
-                                </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
-                                  <select
-                                    onChange={(event) =>
-                                      valueproposition_onChange(
-                                        valueproposition_inputField.id,
-                                        event
-                                      )
-                                    }
-                                    value={
-                                      valueproposition_inputField.acceptance
-                                    }
-                                    id="valueproposition_acceptance"
-                                    name="valueproposition_acceptance"
-                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                  >
-                                    <option>Desirable</option>
-                                    <option>Acceptable</option>
-                                    <option>Undesirable</option>
-                                    <option>Unacceptable</option>
-                                    <option>Catastrophic</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="1">Unlikely to occur</option>
+                                    <option value="2">Possible to occur</option>
+                                    <option value="3">Likely to occur</option>
                                   </select>
                                 </div>
                               </div>
@@ -2367,7 +2354,7 @@ const RA_tab = () => {
                                   valueproposition_inputField.id
                                 )
                               }
-                              className="items-self-center ml-96 relative"
+                              className="items-self-center ml-80 relative"
                             >
                               <TrashIcon
                                 className="h-5 w-5 text-red-500 group-hover:text-red-400"
@@ -2375,10 +2362,10 @@ const RA_tab = () => {
                               />
                             </button>
                           </div>
-                          <div className="flex justify-center">
+                          <div className="relative justify-center ml-96">
                             <button
                               onClick={valueproposition_addRisk}
-                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                              className="justify-self-center mt-2 text-sm py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                             >
                               add more risk
                             </button>
@@ -2395,8 +2382,8 @@ const RA_tab = () => {
                         <h3 className="text-3xl font-semibold leading-10 text-blue-800">
                           Customer Relationships
                         </h3>
-                        <p className="mt-1 text-sm text-blue-800">
-                          (input from user)
+                        <p className="mt-1 mr-64 text-sm text-blue-800">
+                          {customerrelationships}
                         </p>
                       </div>
                     </div>
@@ -2406,7 +2393,7 @@ const RA_tab = () => {
                           key={customerrelationships_inputField.id}
                           className="md:mt-0 md:col-span-2"
                         >
-                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                          <div className="my-14 max-w-screen-md w-full ml-36 shadow sm:rounded-md sm:overflow-hidden">
                             <div className="py-5 bg-white space-y-6 sm:p-6">
                               <div className="w-full grid grid-cols-3 gap-6">
                                 <div className="col-span-6 sm:col-span-3">
@@ -2432,10 +2419,21 @@ const RA_tab = () => {
                                     }
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Strategy Risk</option>
-                                    <option>Operational Risk</option>
-                                    <option>Financial Risk</option>
-                                    <option>Compliance Risk</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="strategyrisk">
+                                      Strategy Risk
+                                    </option>
+                                    <option value="operationalrisk">
+                                      Operational Risk
+                                    </option>
+                                    <option value="financialrisk">
+                                      Financial Risk
+                                    </option>
+                                    <option value="compliancerisk">
+                                      Compliance Risk
+                                    </option>
                                   </select>
                                 </div>
                                 <div className="col-span-3 sm:col-span-2">
@@ -2492,7 +2490,7 @@ const RA_tab = () => {
                                     id="customerrelationships_financialrisk"
                                     name="customerrelationships_financialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2514,8 +2512,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2534,7 +2530,7 @@ const RA_tab = () => {
                                     id="customerrelationships_healthrisk"
                                     name="customerrelationships_healthrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2556,8 +2552,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2576,7 +2570,7 @@ const RA_tab = () => {
                                     name="customerrelationships_naturalrisk"
                                     type="range"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2598,8 +2592,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2618,7 +2610,7 @@ const RA_tab = () => {
                                     id="customerrelationships_socialrisk"
                                     name="customerrelationships_socialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2640,8 +2632,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2660,7 +2650,7 @@ const RA_tab = () => {
                                     id="customerrelationships_governmentrisk"
                                     name="customerrelationships_governmentrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2682,8 +2672,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2702,7 +2690,7 @@ const RA_tab = () => {
                                     id="customerrelationships_legalrisk"
                                     name="customerrelationships_legalrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -2724,8 +2712,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -2736,7 +2722,7 @@ const RA_tab = () => {
                                 <label className="block text-sm font-medium text-blue-800">
                                   Likelihood
                                 </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                <div className="h-6 w-6/12 mt-1 flex rounded-md shadow-sm ">
                                   <select
                                     onChange={(event) =>
                                       customerrelationships_onChange(
@@ -2751,42 +2737,12 @@ const RA_tab = () => {
                                     name="customerrelationships_likelihood"
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Improbable</option>
-                                    <option>Remote</option>
-                                    <option>Occasional</option>
-                                    <option>Probable</option>
-                                    <option>Frequent</option>
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div className="col-span-6 sm:col-span-3">
-                                <label
-                                  htmlFor="acceptance"
-                                  className="block text-sm font-medium text-blue-800"
-                                >
-                                  Level of Acceptance
-                                </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
-                                  <select
-                                    onChange={(event) =>
-                                      customerrelationships_onChange(
-                                        customerrelationships_inputField.id,
-                                        event
-                                      )
-                                    }
-                                    value={
-                                      customerrelationships_inputField.acceptance
-                                    }
-                                    id="customerrelationships_acceptance"
-                                    name="customerrelationships_acceptance"
-                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                  >
-                                    <option>Desirable</option>
-                                    <option>Acceptable</option>
-                                    <option>Undesirable</option>
-                                    <option>Unacceptable</option>
-                                    <option>Catastrophic</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="1">Unlikely to occur</option>
+                                    <option value="2">Possible to occur</option>
+                                    <option value="3">Likely to occur</option>
                                   </select>
                                 </div>
                               </div>
@@ -2801,7 +2757,7 @@ const RA_tab = () => {
                                   customerrelationships_inputField.id
                                 )
                               }
-                              className="items-self-center ml-96 relative"
+                              className="items-self-center ml-80 relative"
                             >
                               <TrashIcon
                                 className="h-5 w-5 text-red-500 group-hover:text-red-400"
@@ -2809,10 +2765,10 @@ const RA_tab = () => {
                               />
                             </button>
                           </div>
-                          <div className="flex justify-center">
+                          <div className="relative justify-center ml-96">
                             <button
                               onClick={customerrelationships_addRisk}
-                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                              className="justify-self-center mt-2 text-sm py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                             >
                               add more risk
                             </button>
@@ -2829,8 +2785,8 @@ const RA_tab = () => {
                         <h3 className="text-3xl font-semibold leading-10 text-blue-800">
                           Channels
                         </h3>
-                        <p className="mt-1 text-sm text-blue-800">
-                          (input from user)
+                        <p className="mt-1 mr-64 text-sm text-blue-800">
+                          {channels}
                         </p>
                       </div>
                     </div>
@@ -2839,7 +2795,7 @@ const RA_tab = () => {
                         key={channels_inputField.id}
                         className="md:mt-0 md:col-span-2"
                       >
-                        <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                        <div className="my-14 max-w-screen-md w-full ml-36 shadow sm:rounded-md sm:overflow-hidden">
                           <div className="py-5 bg-white space-y-6 sm:p-6">
                             <div className="w-full grid grid-cols-3 gap-6">
                               <div className="col-span-6 sm:col-span-3">
@@ -2863,10 +2819,21 @@ const RA_tab = () => {
                                   value={channels_inputField.typeofrisk}
                                   className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 >
-                                  <option>Strategy Risk</option>
-                                  <option>Operational Risk</option>
-                                  <option>Financial Risk</option>
-                                  <option>Compliance Risk</option>
+                                  <option value="">
+                                    -- Please choose an option --
+                                  </option>
+                                  <option value="strategyrisk">
+                                    Strategy Risk
+                                  </option>
+                                  <option value="operationalrisk">
+                                    Operational Risk
+                                  </option>
+                                  <option value="financialrisk">
+                                    Financial Risk
+                                  </option>
+                                  <option value="compliancerisk">
+                                    Compliance Risk
+                                  </option>
                                 </select>
                               </div>
                               <div className="col-span-3 sm:col-span-2">
@@ -2921,7 +2888,7 @@ const RA_tab = () => {
                                   id="channels_financialrisk"
                                   name="channels_financialrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -2941,8 +2908,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -2961,7 +2926,7 @@ const RA_tab = () => {
                                   id="channels_healthrisk"
                                   name="channels_healthrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -2981,8 +2946,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -3001,7 +2964,7 @@ const RA_tab = () => {
                                   name="channels_naturalrisk"
                                   type="range"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -3021,8 +2984,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -3041,7 +3002,7 @@ const RA_tab = () => {
                                   id="channels_socialrisk"
                                   name="channels_socialrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -3061,8 +3022,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -3081,7 +3040,7 @@ const RA_tab = () => {
                                   id="channels_governmentrisk"
                                   name="channels_governmentrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -3101,8 +3060,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -3121,7 +3078,7 @@ const RA_tab = () => {
                                   id="channels_legalrisk"
                                   name="channels_legalrisk"
                                   min="1"
-                                  max="5"
+                                  max="3"
                                   step="1"
                                   list="steplist"
                                   className="mx-5 text-blue-400"
@@ -3141,8 +3098,6 @@ const RA_tab = () => {
                                   <option label="1">1</option>
                                   <option label="2">2</option>
                                   <option label="3">3</option>
-                                  <option label="4">4</option>
-                                  <option label="5">5</option>
                                 </datalist>
                                 <label className="pt-4 text-xs font-medium text-gray-400">
                                   Most Impact
@@ -3153,7 +3108,7 @@ const RA_tab = () => {
                               <label className="block text-sm font-medium text-blue-800">
                                 Likelihood
                               </label>
-                              <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                              <div className="h-6 w-6/12 mt-1 flex rounded-md shadow-sm ">
                                 <select
                                   onChange={(event) =>
                                     channels_onChange(
@@ -3166,40 +3121,12 @@ const RA_tab = () => {
                                   name="channels_likelihood"
                                   className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                 >
-                                  <option>Improbable</option>
-                                  <option>Remote</option>
-                                  <option>Occasional</option>
-                                  <option>Probable</option>
-                                  <option>Frequent</option>
-                                </select>
-                              </div>
-                            </div>
-
-                            <div className="col-span-6 sm:col-span-3">
-                              <label
-                                htmlFor="acceptance"
-                                className="block text-sm font-medium text-blue-800"
-                              >
-                                Level of Acceptance
-                              </label>
-                              <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
-                                <select
-                                  onChange={(event) =>
-                                    channels_onChange(
-                                      channels_inputField.id,
-                                      event
-                                    )
-                                  }
-                                  value={channels_inputField.acceptance}
-                                  id="channels_acceptance"
-                                  name="channels_acceptance"
-                                  className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                >
-                                  <option>Desirable</option>
-                                  <option>Acceptable</option>
-                                  <option>Undesirable</option>
-                                  <option>Unacceptable</option>
-                                  <option>Catastrophic</option>
+                                  <option value="">
+                                    -- Please choose an option --
+                                  </option>
+                                  <option value="1">Unlikely to occur</option>
+                                  <option value="2">Possible to occur</option>
+                                  <option value="3">Likely to occur</option>
                                 </select>
                               </div>
                             </div>
@@ -3210,7 +3137,7 @@ const RA_tab = () => {
                             onClick={() =>
                               channels_removeField(channels_inputField.id)
                             }
-                            className="items-self-center ml-96 relative"
+                            className="items-self-center ml-80 relative"
                           >
                             <TrashIcon
                               className="h-5 w-5 text-red-500 group-hover:text-red-400"
@@ -3218,10 +3145,10 @@ const RA_tab = () => {
                             />
                           </button>
                         </div>
-                        <div className="flex justify-center">
+                        <div className="relative justify-center ml-96">
                           <button
                             onClick={channels_addRisk}
-                            className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                            className="justify-self-center mt-2 text-sm py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                           >
                             add more risk
                           </button>
@@ -3237,8 +3164,8 @@ const RA_tab = () => {
                         <h3 className="text-3xl font-semibold leading-10 text-blue-800">
                           Customer Segments
                         </h3>
-                        <p className="mt-1 text-sm text-blue-800">
-                          (input from user)
+                        <p className="mt-1 mr-64 text-sm text-blue-800">
+                          {customersegments}
                         </p>
                       </div>
                     </div>
@@ -3248,7 +3175,7 @@ const RA_tab = () => {
                           key={customersegments_inputField.id}
                           className="md:mt-0 md:col-span-2"
                         >
-                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                          <div className="my-14 max-w-screen-md w-full ml-36 shadow sm:rounded-md sm:overflow-hidden">
                             <div className="py-5 bg-white space-y-6 sm:p-6">
                               <div className="w-full grid grid-cols-3 gap-6">
                                 <div className="col-span-6 sm:col-span-3">
@@ -3274,10 +3201,21 @@ const RA_tab = () => {
                                     }
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Strategy Risk</option>
-                                    <option>Operational Risk</option>
-                                    <option>Financial Risk</option>
-                                    <option>Compliance Risk</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="strategyrisk">
+                                      Strategy Risk
+                                    </option>
+                                    <option value="operationalrisk">
+                                      Operational Risk
+                                    </option>
+                                    <option value="financialrisk">
+                                      Financial Risk
+                                    </option>
+                                    <option value="compliancerisk">
+                                      Compliance Risk
+                                    </option>
                                   </select>
                                 </div>
                                 <div className="col-span-3 sm:col-span-2">
@@ -3332,7 +3270,7 @@ const RA_tab = () => {
                                     id="customersegments_financialrisk"
                                     name="customersegments_financialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3354,8 +3292,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3374,7 +3310,7 @@ const RA_tab = () => {
                                     id="customersegments_healthrisk"
                                     name="customersegments_healthrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3396,8 +3332,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3416,7 +3350,7 @@ const RA_tab = () => {
                                     name="customersegments_naturalrisk"
                                     type="range"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3438,8 +3372,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3458,7 +3390,7 @@ const RA_tab = () => {
                                     id="customersegments_socialrisk"
                                     name="customersegments_socialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3480,8 +3412,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3500,7 +3430,7 @@ const RA_tab = () => {
                                     id="customersegments_governmentrisk"
                                     name="customersegments_governmentrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3522,8 +3452,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3542,7 +3470,7 @@ const RA_tab = () => {
                                     id="customersegments_legalrisk"
                                     name="customersegments_legalrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3564,8 +3492,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3576,7 +3502,7 @@ const RA_tab = () => {
                                 <label className="block text-sm font-medium text-blue-800">
                                   Likelihood
                                 </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                <div className="h-6 w-6/12 mt-1 flex rounded-md shadow-sm ">
                                   <select
                                     onChange={(event) =>
                                       customersegments_onChange(
@@ -3591,42 +3517,12 @@ const RA_tab = () => {
                                     name="customersegments_likelihood"
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Improbable</option>
-                                    <option>Remote</option>
-                                    <option>Occasional</option>
-                                    <option>Probable</option>
-                                    <option>Frequent</option>
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div className="col-span-6 sm:col-span-3">
-                                <label
-                                  htmlFor="acceptance"
-                                  className="block text-sm font-medium text-blue-800"
-                                >
-                                  Level of Acceptance
-                                </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
-                                  <select
-                                    onChange={(event) =>
-                                      customersegments_onChange(
-                                        customersegments_inputField.id,
-                                        event
-                                      )
-                                    }
-                                    value={
-                                      customersegments_inputField.acceptance
-                                    }
-                                    id="customersegments_acceptance"
-                                    name="customersegments_acceptance"
-                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                  >
-                                    <option>Desirable</option>
-                                    <option>Acceptable</option>
-                                    <option>Undesirable</option>
-                                    <option>Unacceptable</option>
-                                    <option>Catastrophic</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="1">Unlikely to occur</option>
+                                    <option value="2">Possible to occur</option>
+                                    <option value="3">Likely to occur</option>
                                   </select>
                                 </div>
                               </div>
@@ -3641,7 +3537,7 @@ const RA_tab = () => {
                                   customersegments_inputField.id
                                 )
                               }
-                              className="items-self-center ml-96 relative"
+                              className="items-self-center ml-80 relative"
                             >
                               <TrashIcon
                                 className="h-5 w-5 text-red-500 group-hover:text-red-400"
@@ -3649,10 +3545,10 @@ const RA_tab = () => {
                               />
                             </button>
                           </div>
-                          <div className="flex justify-center">
+                          <div className="relative justify-center ml-96">
                             <button
                               onClick={customersegments_addRisk}
-                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                              className="justify-self-center mt-2 text-sm py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                             >
                               add more risk
                             </button>
@@ -3669,8 +3565,8 @@ const RA_tab = () => {
                         <h3 className="text-3xl font-semibold leading-10 text-blue-800">
                           Cost Structure
                         </h3>
-                        <p className="mt-1 text-sm text-blue-800">
-                          (input from user)
+                        <p className="mt-1 mr-64 text-sm text-blue-800">
+                          {coststructure}
                         </p>
                       </div>
                     </div>
@@ -3680,7 +3576,7 @@ const RA_tab = () => {
                           key={coststructure_inputField.id}
                           className="md:mt-0 md:col-span-2"
                         >
-                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                          <div className="my-14 max-w-screen-md w-full ml-36 shadow sm:rounded-md sm:overflow-hidden">
                             <div className="py-5 bg-white space-y-6 sm:p-6">
                               <div className="w-full grid grid-cols-3 gap-6">
                                 <div className="col-span-6 sm:col-span-3">
@@ -3704,10 +3600,21 @@ const RA_tab = () => {
                                     value={coststructure_inputField.typeofrisk}
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Strategy Risk</option>
-                                    <option>Operational Risk</option>
-                                    <option>Financial Risk</option>
-                                    <option>Compliance Risk</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="strategyrisk">
+                                      Strategy Risk
+                                    </option>
+                                    <option value="operationalrisk">
+                                      Operational Risk
+                                    </option>
+                                    <option value="financialrisk">
+                                      Financial Risk
+                                    </option>
+                                    <option value="compliancerisk">
+                                      Compliance Risk
+                                    </option>
                                   </select>
                                 </div>
                                 <div className="col-span-3 sm:col-span-2">
@@ -3762,7 +3669,7 @@ const RA_tab = () => {
                                     id="coststructure_financialrisk"
                                     name="coststructure_financialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3784,8 +3691,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3804,7 +3709,7 @@ const RA_tab = () => {
                                     id="coststructure_healthrisk"
                                     name="coststructure_healthrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3824,8 +3729,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3844,7 +3747,7 @@ const RA_tab = () => {
                                     name="coststructure_naturalrisk"
                                     type="range"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3864,8 +3767,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3884,7 +3785,7 @@ const RA_tab = () => {
                                     id="coststructure_socialrisk"
                                     name="coststructure_socialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3904,8 +3805,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3924,7 +3823,7 @@ const RA_tab = () => {
                                     id="coststructure_governmentrisk"
                                     name="coststructure_governmentrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3946,8 +3845,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3966,7 +3863,7 @@ const RA_tab = () => {
                                     id="coststructure_legalrisk"
                                     name="coststructure_legalrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -3986,8 +3883,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -3998,7 +3893,7 @@ const RA_tab = () => {
                                 <label className="block text-sm font-medium text-blue-800">
                                   Likelihood
                                 </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                <div className="h-6 w-6/12 mt-1 flex rounded-md shadow-sm ">
                                   <select
                                     onChange={(event) =>
                                       coststructure_onChange(
@@ -4011,40 +3906,12 @@ const RA_tab = () => {
                                     name="coststructure_likelihood"
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Improbable</option>
-                                    <option>Remote</option>
-                                    <option>Occasional</option>
-                                    <option>Probable</option>
-                                    <option>Frequent</option>
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div className="col-span-6 sm:col-span-3">
-                                <label
-                                  htmlFor="acceptance"
-                                  className="block text-sm font-medium text-blue-800"
-                                >
-                                  Level of Acceptance
-                                </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
-                                  <select
-                                    onChange={(event) =>
-                                      coststructure_onChange(
-                                        coststructure_inputField.id,
-                                        event
-                                      )
-                                    }
-                                    value={coststructure_inputField.acceptance}
-                                    id="coststructure_acceptance"
-                                    name="coststructure_acceptance"
-                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                  >
-                                    <option>Desirable</option>
-                                    <option>Acceptable</option>
-                                    <option>Undesirable</option>
-                                    <option>Unacceptable</option>
-                                    <option>Catastrophic</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="1">Unlikely to occur</option>
+                                    <option value="2">Possible to occur</option>
+                                    <option value="3">Likely to occur</option>
                                   </select>
                                 </div>
                               </div>
@@ -4057,7 +3924,7 @@ const RA_tab = () => {
                                   coststructure_inputField.id
                                 )
                               }
-                              className="items-self-center ml-96 relative"
+                              className="items-self-center ml-80 relative"
                             >
                               <TrashIcon
                                 className="h-5 w-5 text-red-500 group-hover:text-red-400"
@@ -4065,10 +3932,10 @@ const RA_tab = () => {
                               />
                             </button>
                           </div>
-                          <div className="flex justify-center">
+                          <div className="relative justify-center ml-96">
                             <button
                               onClick={coststructure_addRisk}
-                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                              className="justify-self-center mt-2 text-sm py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                             >
                               add more risk
                             </button>
@@ -4085,8 +3952,8 @@ const RA_tab = () => {
                         <h3 className="text-3xl font-semibold leading-10 text-blue-800">
                           Revenue Streams
                         </h3>
-                        <p className="mt-1 text-sm text-blue-800">
-                          (input from user)
+                        <p className="mt-1 mr-64 text-sm text-blue-800">
+                          {revenuestream}
                         </p>
                       </div>
                     </div>
@@ -4096,7 +3963,7 @@ const RA_tab = () => {
                           key={revenuestreams_inputField.id}
                           className="md:mt-0 md:col-span-2"
                         >
-                          <div className="relative my-14 w-full mx-36 shadow sm:rounded-md sm:overflow-hidden">
+                          <div className="my-14 max-w-screen-md w-full ml-36 shadow sm:rounded-md sm:overflow-hidden">
                             <div className="py-5 bg-white space-y-6 sm:p-6">
                               <div className="w-full grid grid-cols-3 gap-6">
                                 <div className="col-span-6 sm:col-span-3">
@@ -4120,10 +3987,21 @@ const RA_tab = () => {
                                     value={revenuestreams_inputField.typeofrisk}
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Strategy Risk</option>
-                                    <option>Operational Risk</option>
-                                    <option>Financial Risk</option>
-                                    <option>Compliance Risk</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="strategyrisk">
+                                      Strategy Risk
+                                    </option>
+                                    <option value="operationalrisk">
+                                      Operational Risk
+                                    </option>
+                                    <option value="financialrisk">
+                                      Financial Risk
+                                    </option>
+                                    <option value="compliancerisk">
+                                      Compliance Risk
+                                    </option>
                                   </select>
                                 </div>
                                 <div className="col-span-3 sm:col-span-2">
@@ -4178,7 +4056,7 @@ const RA_tab = () => {
                                     id="revenuestreams_financialrisk"
                                     name="revenuestreams_financialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -4200,8 +4078,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -4220,7 +4096,7 @@ const RA_tab = () => {
                                     id="revenuestreams_healthrisk"
                                     name="revenuestreams_healthrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -4240,8 +4116,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -4260,7 +4134,7 @@ const RA_tab = () => {
                                     name="revenuestreams_naturalrisk"
                                     type="range"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -4282,8 +4156,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -4302,7 +4174,7 @@ const RA_tab = () => {
                                     id="revenuestreams_socialrisk"
                                     name="revenuestreams_socialrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -4322,8 +4194,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -4342,7 +4212,7 @@ const RA_tab = () => {
                                     id="revenuestreams_governmentrisk"
                                     name="revenuestreams_governmentrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -4364,8 +4234,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -4384,7 +4252,7 @@ const RA_tab = () => {
                                     id="revenuestreams_legalrisk"
                                     name="revenuestreams_legalrisk"
                                     min="1"
-                                    max="5"
+                                    max="3"
                                     step="1"
                                     list="steplist"
                                     className="mx-5 text-blue-400"
@@ -4404,8 +4272,6 @@ const RA_tab = () => {
                                     <option label="1">1</option>
                                     <option label="2">2</option>
                                     <option label="3">3</option>
-                                    <option label="4">4</option>
-                                    <option label="5">5</option>
                                   </datalist>
                                   <label className="pt-4 text-xs font-medium text-gray-400">
                                     Most Impact
@@ -4416,7 +4282,7 @@ const RA_tab = () => {
                                 <label className="block text-sm font-medium text-blue-800">
                                   Likelihood
                                 </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
+                                <div className="h-6 w-6/12 mt-1 flex rounded-md shadow-sm ">
                                   <select
                                     onChange={(event) =>
                                       revenuestreams_onChange(
@@ -4429,40 +4295,12 @@ const RA_tab = () => {
                                     name="revenuestreams_likelihood"
                                     className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                   >
-                                    <option>Improbable</option>
-                                    <option>Remote</option>
-                                    <option>Occasional</option>
-                                    <option>Probable</option>
-                                    <option>Frequent</option>
-                                  </select>
-                                </div>
-                              </div>
-
-                              <div className="col-span-6 sm:col-span-3">
-                                <label
-                                  htmlFor="acceptance"
-                                  className="block text-sm font-medium text-blue-800"
-                                >
-                                  Level of Acceptance
-                                </label>
-                                <div className="h-6 w-3/12 mt-1 flex rounded-md shadow-sm ">
-                                  <select
-                                    onChange={(event) =>
-                                      revenuestreams_onChange(
-                                        revenuestreams_inputField.id,
-                                        event
-                                      )
-                                    }
-                                    value={revenuestreams_inputField.acceptance}
-                                    id="revenuestreams_acceptance"
-                                    name="revenuestreams_acceptance"
-                                    className="mt-1 block w-full py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                                  >
-                                    <option>Desirable</option>
-                                    <option>Acceptable</option>
-                                    <option>Undesirable</option>
-                                    <option>Unacceptable</option>
-                                    <option>Catastrophic</option>
+                                    <option value="">
+                                      -- Please choose an option --
+                                    </option>
+                                    <option value="1">Unlikely to occur</option>
+                                    <option value="2">Possible to occur</option>
+                                    <option value="3">Likely to occur</option>
                                   </select>
                                 </div>
                               </div>
@@ -4475,7 +4313,7 @@ const RA_tab = () => {
                                   revenuestreams_inputField.id
                                 )
                               }
-                              className="items-self-center ml-96 relative"
+                              className="items-self-center ml-80 relative"
                             >
                               <TrashIcon
                                 className="h-5 w-5 text-red-500 group-hover:text-red-400"
@@ -4483,10 +4321,10 @@ const RA_tab = () => {
                               />
                             </button>
                           </div>
-                          <div className="flex justify-center">
+                          <div className="relative justify-center ml-96">
                             <button
                               onClick={revenuestreams_addRisk}
-                              className="justify-self-center mt-2 text-sm inline-flex py-2 ml-56 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                              className="justify-self-center mt-2 text-sm py-2 px-8 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                             >
                               add more risk
                             </button>
@@ -4505,10 +4343,4 @@ const RA_tab = () => {
   );
 };
 
-export default function TabsRender() {
-  return (
-    <>
-      <RA_tab />;
-    </>
-  );
-}
+export default RA_tab;

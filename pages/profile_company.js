@@ -5,20 +5,6 @@ import axios from "axios";
 
 import { useRouter } from "next/router";
 
-const ScrollToPoint1 = () => {
-  window.scrollTo({
-    top: 490,
-    behavior: "smooth",
-  });
-};
-
-const ScrollToPoint2 = () => {
-  window.scrollTo({
-    top: 1600,
-    behavior: "smooth",
-  });
-};
-
 const profile_company = () => {
   const router = useRouter();
 
@@ -42,11 +28,15 @@ const profile_company = () => {
 
   const fetchItems = async () => {
     await axios
-      .get("http://api-riskwhale.herokuapp.com/userinfo/" + localStorage.user, {
-        headers: {
-          "auth-token": localStorage.token,
-        },
-      })
+      .get(
+        "http://api-riskwhale.herokuapp.com/userinfo/company/" +
+          localStorage.user,
+        {
+          headers: {
+            "auth-token": localStorage.token,
+          },
+        }
+      )
       .then((response) => {
         console.log(response.data.functionaldepartments);
 
@@ -89,12 +79,12 @@ const profile_company = () => {
       <MainMenu />
 
       <>
-        <div className="pt-40 px-14">
+        <div className="pt-36 px-14">
           <h1 className="text-center text-lg text-5xl font-bold leading-6 text-blue-800">
             Company Profile
           </h1>
         </div>
-        <div className="pt-24 px-14">
+        <div className="pt-14 px-14">
           <div className="md:grid md:grid-cols-3 md:gap-6 ">
             <div className="md:col-span-1 px-14">
               <div className="px-4 sm:px-0">
@@ -124,14 +114,6 @@ const profile_company = () => {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                  <button
-                    onClick={ScrollToPoint1}
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                  >
-                    Next
-                  </button>
                 </div>
               </div>
             </div>
@@ -262,14 +244,6 @@ const profile_company = () => {
                     </div>
                   </div>
                 </div>
-                <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-                  <button
-                    onClick={ScrollToPoint2}
-                    className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                  >
-                    Next
-                  </button>
-                </div>
               </div>
             </div>
           </div>
@@ -289,7 +263,7 @@ const profile_company = () => {
                   List of Functional Areas
                 </h3>
                 <p className="mt-1 text-sm text-blue-800">
-                  Decide which communications you'd like to receive and how.
+                  List all functional areas in your company for further analysis
                 </p>
               </div>
             </div>
@@ -333,9 +307,8 @@ const profile_company = () => {
                   Information Confirmation
                 </h3>
                 <p className="mt-1 text-sm text-blue-800">
-                  Fill-in company name and busienss model canvas for further
-                  use. The business model canvas will be saved with other
-                  account information.
+                  Type full name to confirm that the provided information is
+                  true.
                 </p>
               </div>
             </div>
@@ -361,6 +334,9 @@ const profile_company = () => {
           </div>
         </div>
         <div className="px-4 py-3 bg-gray-50 text-center sm:px-6">
+          <button className="w-56 inline-flex justify-center my-24 mr-12 p-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+            Edit Profile
+          </button>
           <button
             onClick={logout}
             className="w-56 inline-flex justify-center my-24 px-4 p-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
