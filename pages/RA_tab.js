@@ -98,7 +98,7 @@ const RA_tab = () => {
 
   const postDetails = async () => {
     console.log(postKeyPartners);
-    console.log("posted");
+    console.log("posting");
 
     await axios
       .post(
@@ -111,7 +111,6 @@ const RA_tab = () => {
         {
           headers: {
             "auth-token": localStorage.token,
-            "Access-Control-Allow-Origin": "*",
           },
         }
       )
@@ -240,7 +239,7 @@ const RA_tab = () => {
         legal,
       },
       likelihood,
-    }),
+    })
   );
 
   const keyactivities_onChange = (id, event) => {

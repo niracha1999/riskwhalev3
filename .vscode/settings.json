@@ -4,6 +4,6 @@
         "node_modules{,/**}",
         ".vscode{,/**}"
     ],
-    "appService.defaultWebAppToDeploy": "/subscriptions/5850953d-9cf9-49a1-957d-f28bb0d2627f/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/RiskWhale-WebApp",
-    "appService.deploySubpath": "."
+    "appService.deploySubpath": ".",
+    "appService.defaultWebAppToDeploy": "/subscriptions/5850953d-9cf9-49a1-957d-f28bb0d2627f/resourceGroups/RiskWhale-ResourceGroup/providers/Microsoft.Web/sites/RiskWhale-WebApp"
 }
